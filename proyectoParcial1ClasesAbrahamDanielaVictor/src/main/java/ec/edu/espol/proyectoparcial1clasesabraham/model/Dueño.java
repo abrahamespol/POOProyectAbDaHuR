@@ -1,0 +1,115 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ec.edu.espol.proyectoparcial1clasesabraham.model;
+
+import ec.edu.espol.proyectoparcial1clasesabraham.util.Util;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Abraham, Daniela, Victor
+ */
+public class Dueño extends Persona{
+    private String direccion;
+    private ArrayList<Mascota> mascotas;
+    //ESTA LISTA NO SE LLENA, NI NINGUNA OTRA DE CARDINALIDADES
+    //Constructores
+    
+    public Dueño(int id, String nombre, String apellidos, String telefono,
+        String email, String direccion) {
+        super(id, nombre, apellidos, telefono, email);
+        this.direccion = direccion;
+        this.mascotas = new ArrayList<>();
+    }
+    
+    //Getters no Heredados
+
+    public String getDireccion() {
+        return direccion;
+    }
+    
+    //Setters no Heredados (La lista de Mascotas puede ser editada, no tiene por que ser eliminada)
+    
+    public void setDireccion(String direccion){
+        this.direccion = direccion;
+    }
+    
+    //toString sobreescrito
+    
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(/*"Id de Dueño: "+this.nombre+*/" Dueño nombre: "+this.nombre+", Apellidos: "
+                +this.apellidos+", Direccion: "+this.direccion+" tiene: \n");
+        for(Mascota mascota : mascotas){
+            sb.append("El/La"+mascota.getTipo()+", de Nombre "+mascota.getNombre()+" y raza "+mascota.getRaza()+".\n");
+        }        
+        return sb.toString();
+    }
+    
+    // Un dueño puede ser comparado por su id, nombres y apellidos (Lista de mascotas y direccion
+    //puede ser algo a cambiar dependiendo de cuantos concursos se hagan y se registren
+    
+    //NO ES NECESARIO SOBREESCRIBIR EL EQUALS, SOLO SE HEREDA
+    
+    //Comportamientos para Archivos (guardar objetos en ellos, leerlos y crear listas con cada uno) y nextObjeto
+
+    @Override
+    public void saveFile(String nomFile){
+        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile),true))){
+            pw.println(Util.nextID(nomFile)+"|"+this.nombre+"|"+this.apellidos+"|"+
+                    this.telefono+"|"+this.email+"|"+this.direccion);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    //Crear lista de Dueños por medio de los que se llenan en un archivo
+    
+    public static ArrayList<Dueño> readFromFile(String nomFile){
+        ArrayList<Dueño> dos = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                Dueño deo = new Dueño(Integer.parseInt(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5]);
+                dos.add(deo);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return dos;
+    }
+    
+    //Pedir objeto por Scanner, AQUI NO SE PERMITE QUE EL USUARIO INGRESE EL ID DE DUEÑO, sino que se lo ingresa por medio de nextID    
+    //MUY IMPORTANTE: como cada objeto se guarda en un archivo, el ID depende de cuantos objetos esten guardados en este
+    //Por lo que al usar esta funcion, se meten un Scanner (para que el usuario llene los valores), y el nombre del archivo
+    //A pesar de que no se guarden objetos en ese lugar
+    public static Dueño nextDueno(Scanner sc){
+        int idd = Util.nextID("dueños.txt");
+        System.out.println("Ingrese el nombre del Dueño de la/s mascota/s: ");
+        String nom0 = sc.next();
+        String nom = sc.nextLine();
+        System.out.println("Ingrese los apellidos del Dueño de la/s mascota/s: ");
+        String apell = sc.nextLine();
+        System.out.println("Ingrese el numero de telefono del Dueño de la/s mascota/s: ");
+        String phoNum = sc.nextLine();
+        System.out.println("Ingrese el email del Dueño de la/s mascota/s: ");
+        String email = sc.nextLine();
+        System.out.println("Ingrese la direccion del Dueño de la/s mascota/s: ");
+        String direction = sc.nextLine();
+        Dueño neoDu = new Dueño(idd, nom, apell, phoNum, email, direction);
+        return neoDu;
+    }
+
+}
