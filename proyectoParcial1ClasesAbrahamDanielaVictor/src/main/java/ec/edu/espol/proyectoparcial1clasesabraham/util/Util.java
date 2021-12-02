@@ -69,23 +69,12 @@ public class Util {
                 case 2:
                     System.out.println("Por favor ingrese los datos de la Mascota\n");
                     Mascota mascota1 = Mascota.nextMascota(sc);
-<<<<<<< HEAD
                     int indD = 0;
                     do{
                         indD = Mascota.opcion2(sc);
                     }while(indD<0);
                     mascota1.setIdDueño(indD);
                     mascota1.saveFile("mascotas.txt");
-=======
-                    int indD = Mascota.opcion2(sc);
-                    if(indD>=0){
-                        mascota1.setIdDueño(indD);
-                        mascota1.saveFile("mascotas.txt");
-                    }
-                    
-                    else
-                    
->>>>>>> cb3dd12fcbd87611d7e3f3c06f09bad6d96ecbba
                     break;
                 
                 case 3:
