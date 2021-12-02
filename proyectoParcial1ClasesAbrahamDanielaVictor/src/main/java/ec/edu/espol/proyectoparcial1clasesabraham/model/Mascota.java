@@ -125,8 +125,13 @@ public class Mascota {
         if (getClass() != obj.getClass()) {
             return false;
         }
+<<<<<<< HEAD
         Mascota msc = (Mascota) obj;
         return (this.idMascota == msc.idMascota && this.idDueño == msc.idDueño && Objects.equals(this.nombre, msc.nombre));
+=======
+        final Mascota other = (Mascota) obj;
+        return (this.idMascota != other.idMascota && this.idDueño != other.idDueño && !Objects.equals(this.nombre, other.nombre) );
+>>>>>>> cb3dd12fcbd87611d7e3f3c06f09bad6d96ecbba
     }
 
     
