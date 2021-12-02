@@ -5,12 +5,18 @@
  */
 package ec.edu.espol.proyectoparcial1clasesabraham.model;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
+import java.util.Scanner;
+import jdk.jshell.execution.Util;
 
 /**
  *
- * @author Abraham, Daniela, Victor
+ * @author Lenovo
  */
 public class Criterio {
     private int idCriterio;
@@ -21,6 +27,17 @@ public class Criterio {
     private int idEvaluacion;
     private int idConcurso;
     private Concurso concursos;
+    
+    
+     public Criterio(int idCriterio,int idConcurso, String nombre, String descripcion, double puntajeMax) {
+        this.idCriterio = idCriterio;
+        this.idConcurso = idConcurso;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.puntajeMax = puntajeMax;
+       
+    }
+    
 
     public Criterio(int idCriterio, String nombre, String descripcion, double puntajeMax, ArrayList<Evaluacion> evaluaciones, int idEvaluacion, int idConcurso, Concurso concursos) {
         this.idCriterio = idCriterio;
@@ -34,35 +51,35 @@ public class Criterio {
     }
 
     public int getIdCriterio() {
-        return idCriterio;
+        return this.idCriterio;
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion;
     }
 
     public double getPuntajeMax() {
-        return puntajeMax;
+        return this.puntajeMax;
     }
 
     public ArrayList<Evaluacion> getEvaluaciones() {
-        return evaluaciones;
+        return this.evaluaciones;
     }
 
     public int getIdEvaluacion() {
-        return idEvaluacion;
+        return this.idEvaluacion;
     }
 
     public int getIdConcurso() {
-        return idConcurso;
+        return this.idConcurso;
     }
 
     public Concurso getConcursos() {
-        return concursos;
+        return this.concursos;
     }
 
     public void setIdCriterio(int idCriterio) {
@@ -129,7 +146,65 @@ public class Criterio {
         sb.append("Criterio No. " + this.idCriterio +"\n Nombre del criterio: "+ this.nombre+ "\n Descripcion: " + this.descripcion+ "\n Puntaje máximo: "+this.puntajeMax);
         sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + concursos.getNombre()+"\n Fecha: " + concursos.getFecha() +"/n Fecha de Inscripción: " + concursos.getFechaInscripcion() + "/n Fecha de cierre de Inscripción: " + concursos.getFechaCierreInscripcion()+ "/n Temática: " + concursos.getTematica() + "/n Costo: " + concursos.getCosto());
         for(Evaluacion evaluacion : evaluaciones)
-            sb.append("Evaluaciones No. "+this.idEvaluacion+"\n Calificacion: "+evaluacion.getCalificacion());
+            sb.append("Evaluaciones No. "+this.idEvaluacion+"\n Calificacion: "+evaluacion.getCalificacion);
         return sb.toString();
+    }
+    
+    
+    public void saveFile(String nomFile){ 
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile)))){
+            pw.println(Util.nextID(nomFile)+"|"+this.idConcurso+"|"+this.nombre+"|"+this.descripcion+"|"+this.puntajeMax);
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static ArrayList<Criterio> readFromFile(String nomFile){
+        ArrayList<Criterio> criterio = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                Criterio cr = new Criterio(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2],tokens[3],Double.parseDouble(tokens[4]));
+                criterio.add(cr);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return criterio;
+    }
+    
+    public static Criterio nextCriterio(Scanner sc){
+        int idcr = Util.nextID("criterios.txt");
+        int idc = 0;
+        System.out.println("Ingrese el nombre del criterio: ");
+        String name = sc.next();
+        String namec = sc.nextLine();
+        System.out.println("Ingrese la descripción del criterio: ");
+        String dp = sc.nextLine();
+        System.out.println("Ingrese el puntaje máximo, si es un entero agreguele .0: ");
+        Double pm = sc.nextDouble();
+        Criterio cr1 = new Criterio(idcr,idc, namec, dp, pm);
+        return cr1;
+    }
+    
+    //Metodo para sacar el email del dueño
+    
+    public static int opcion2(Scanner sc){
+        System.out.println("Por favor ingrese el nombre del concurso al que pertenecen esos premios: \n");
+        String nb = sc.nextLine();
+        int indic = 0;
+        ArrayList<Concurso> concurso = Concurso.readFromFile("concursos.txt");
+        for(Concurso c : concurso){
+            if(Objects.equals(c.getNombre,nb)){
+                indic = concurso.indexOf(c);
+                return indic;
+            }
+        }
+        return -1;
     }
 }
