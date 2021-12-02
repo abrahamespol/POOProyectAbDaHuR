@@ -113,15 +113,14 @@ public class Util {
                         Criterio c = Criterio.nextCriterio(sc);
                         lst_crit.add(c);
                     }
-                    int indC = Criterio.opcion5(sc);
-                    if(indC>=0){
-                        for(Criterio crit : lst_crit){
-                            crit.setIdConcurso(indC);
-                            crit.saveFile("criterios.txt");
-                        }
-                    }
-                    else
-                    
+                    int indC = 0;
+                    do{
+                        indC = Criterio.opcion5(sc);
+                    }while(indC<0);
+                    for(Criterio crit : lst_crit){
+                        crit.setIdConcurso(indC);
+                        crit.saveFile("criterios.txt");
+                    }                    
                     break;
                 
                 case 6:
