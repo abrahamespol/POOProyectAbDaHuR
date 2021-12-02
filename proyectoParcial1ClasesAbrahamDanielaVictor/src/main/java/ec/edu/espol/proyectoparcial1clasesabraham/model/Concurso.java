@@ -5,13 +5,19 @@
  */
 package ec.edu.espol.proyectoparcial1clasesabraham.model;
 
+import ec.edu.espol.proyectoparcial1clasesabraham.util.Util;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Scanner;
+
 
 /**
  *
- * @author Abraham, Daniela, Victor
+ * @author Lenovo
  */
 public class Concurso {
     private int idConcurso;
@@ -24,6 +30,20 @@ public class Concurso {
     private ArrayList<Inscripcion> inscripcion;
     private ArrayList<Premio> premios;
     private ArrayList<Criterio> criterio;
+    
+    //si no hacemos un constructor sin argumentos lo que hace Abraham en sus constructores sale error
+    public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica, double costo) {
+        this.idConcurso = idConcurso;
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.fechaInscripcion = fechaInscripcion;
+        this.fechaCierreInscripcion = fechaCierreInscripcion;
+        this.tematica = tematica;
+        this.costo = costo;
+        
+    }
+    
+    
 
     public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica, double costo, ArrayList<Inscripcion> inscripcion, ArrayList<Premio> premios, ArrayList<Criterio> criterio) {
         this.idConcurso = idConcurso;
@@ -121,23 +141,17 @@ public class Concurso {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
+        }        
+        if (this == obj) {
+            return true;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Concurso other = (Concurso) obj;
-        if (this.idConcurso != other.idConcurso) {
-            return false;
-        }
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        return true;
+        Concurso co = (Concurso) obj;
+        return this.idConcurso == co.idConcurso && Objects.equals(this.nombre, co.nombre);
     }
 
    
@@ -147,7 +161,7 @@ public class Concurso {
         StringBuilder sb = new StringBuilder();
         sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + this.nombre+"\n Fecha: " + this.fecha +"/n Fecha de Inscripción: " + this.fechaInscripcion + "/n Fecha de cierre de Inscripción: " + this.fechaCierreInscripcion+ "/n Temática: " + this.tematica + "/n Costo: " + this.costo);
         for(Inscripcion ins : inscripcion)
-            sb.append("\n Mascota"+ins.getMascota()+"\n Descuento: "+ins.getDescuento()+"\n Valos a pagar:"+ins.getValor());
+            sb.append("\n Mascota"+ins.getMascota()+"\n Descuento: "+ins.getDescuento()+"\n Valor a pagar:"+ins.getValor());
         
         for(Premio premio : premios)
             sb.append("\n El premio: "+ premio.getDescripcion() + " está destinado para el "+ premio.getPuesto() +"lugar. \n");
@@ -156,6 +170,62 @@ public class Concurso {
             sb.append("Criterio No.: " + crit.getIdCriterio() + "/n Descripción: " + crit.getDescripcion() + "\n Puntaje máximo: "+ crit.getPuntajeMax());
         
         return sb.toString();
-    }    
+    }
+    //métodos
+    
+     public void saveFile(String nomFile){ 
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile)))){
+            pw.println(Util.nextID(nomFile)+ "|" + this.nombre+"|" + this.fecha +"|" + this.fechaInscripcion + "|" + this.fechaCierreInscripcion+ "|" + this.tematica + "|" + this.costo);
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static ArrayList<Concurso> readFromFile(String nomFile){
+        ArrayList<Concurso> concurso = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");// revisar video
+                Concurso con = new Concurso(Integer.parseInt(tokens[0]),tokens[1],(tokens[2]),(tokens[3]),(tokens[4]),tokens[5],Double.parseDouble(tokens[6]));
+                concurso.add(con);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return concurso;
+    }
+    
+    public static Concurso nextConcurso(Scanner sc){
+        int idc = Util.nextID("concursos.txt");
+        System.out.println("Ingrese el nombre del concurso: ");
+        String name = sc.next();//no sé porque pusiste el next y después el nextLine porque podía solo poner el next line y ya, pero lo pongo por si acaso
+        String name1 = sc.nextLine();
+        System.out.println("Ingrese la fecha del concurso: ");
+        Date f = sc.nextDate();//Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
+        System.out.println("Ingrese la fecha de incripción del concurso: ");
+        Date fi = sc.nextDate();//Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
+        System.out.println("Ingrese la fecha de cierre de incripción del consurso: ");
+        Date fc = sc.nextDate(); //Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
+        System.out.println("Ingrese la temática del concurso: ");
+        String tm = sc.nextLine();
+        System.out.println("Ingrese el costo del consurso: ");
+        Double ct = sc.nextDouble();
+        Concurso con = new Concurso(idc, name1, f, fi, fc,tm,ct);
+        return con;
+    }
+    
+    
+    
+    
+    
 
+    
+    
+    
+    
 }

@@ -5,7 +5,10 @@
  */
 package ec.edu.espol.proyectoparcial1clasesabraham.util;
 
+import ec.edu.espol.proyectoparcial1clasesabraham.model.Concurso;
+import ec.edu.espol.proyectoparcial1clasesabraham.model.Criterio;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Dueño;
+import ec.edu.espol.proyectoparcial1clasesabraham.model.Mascota;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.MiembroJurado;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Premio;
 import java.io.File;
@@ -45,8 +48,8 @@ public class Util {
     public static void menuOpciones(Scanner sc){ 
         //codigo
         System.out.println("-- Gracias por Ingresar al menú de opciones --\n");
-        System.out.println("-- Tiene 8 posibles opciones sobre las que crear registros. -- \n -- Elija con cuidado un NUMERO de opcion, de los dados a continuacion:--\n");
-        System.out.println("1: Dueño. 2: Macota. 3: Concurso. 4: Premio. \n5: Criterio. 6: Inscripcion. 7: MiembroJurado. 8: Evaluacion\n");
+        System.out.println("-- Tiene 8 posibles opciones sobre las que crear registros. -- \n-- Elija con cuidado un NUMERO de opcion, de los dados a continuacion:--\n");
+        System.out.println("1: Dueño. \n2: Macota. \n3: Concurso. \n4: Premio. \n5: Criterio. \n6: Inscripcion. \n7: MiembroJurado. \n8: Evaluacion\n");
         int infNGTV = (int)Double.NEGATIVE_INFINITY;
         int infPSTV = (int)Double.POSITIVE_INFINITY;
         int opcion;
@@ -57,18 +60,29 @@ public class Util {
             }while(opcion < 1 || opcion > 8);
             switch(opcion){
                 case 1:
-                    System.out.println("Por favor ingrese los datos del Dueño\n");
+                    System.out.println("Por favor ingrese los datos del Dueño: \n");
                     Dueño due = Dueño.nextDueno(sc);
                     due.saveFile("dueños.txt");
                     System.out.println("\n");
                     break;
                     
                 case 2:
-                    
+                    System.out.println("Por favor ingrese los datos de la Mascota\n");
+                    Mascota mascota1 = Mascota.nextMascota(sc);
+                    int indD = 0;
+                    do{
+                        indD = Mascota.opcion2(sc);
+                    }while(indD<0);
+                    mascota1.setIdDueño(indD);
+                    mascota1.saveFile("mascotas.txt");
                     break;
                 
                 case 3:
                     
+                    System.out.println("Por favor ingrese los datos del Concurso: \n");
+                    Concurso concurso1 = Concurso.nextConcurso(sc);
+                    concurso1.saveFile("concursos.txt");
+                    System.out.println("\n");
                     break;
                 
                 case 4:
@@ -76,26 +90,37 @@ public class Util {
                     int cantidad = sc.nextInt();
                     ArrayList<Premio> awrdsCntst = new ArrayList<>();
                     for(int i = 0 ; i<cantidad; i++){
-                        //Hack, parece qur nextPremio no recibe Concurso
                         Premio p = Premio.nextPremio(sc);
                         //añade cada premio en esta lista
                         awrdsCntst.add(p);
                     }
-                    int indF = Premio.opcion4(sc);
-                    if(indF>=0){
-                        for(Premio pri : awrdsCntst){
-                            pri.setIdConcurso(indF);
+                    int indP = 0;
+                    do{
+                        indP = Premio.opcion4(sc);
+                    }while(indP<0);
+                    for(Premio pri : awrdsCntst){
+                            pri.setIdConcurso(indP);
                             pri.saveFile("premios.txt");
-                        }
-                    }
-                    else
-                        
-                    //aqui se pide el nombre del concurso, se hace set del id del concurso porque esta en default y luego se guardan en el archivo
-                    //Luego de setearlos (uno por uno en la listaaa), guardalos en el archivo
-                    //puedes hacer esto en nextPremio, tambien puedes pedir el nombre del premio aqui
+                    }   
                     break;
 
                 case 5:
+                    
+                    System.out.println("Escriba la cantidad de criterios a ingresar: \n");
+                    int cant = sc.nextInt();
+                    ArrayList<Criterio> lst_crit = new ArrayList<>();
+                    for(int i = 0 ; i<cant; i++){
+                        Criterio c = Criterio.nextCriterio(sc);
+                        lst_crit.add(c);
+                    }
+                    int indC = Criterio.opcion5(sc);
+                    if(indC>=0){
+                        for(Criterio crit : lst_crit){
+                            crit.setIdConcurso(indC);
+                            crit.saveFile("criterios.txt");
+                        }
+                    }
+                    else
                     
                     break;
                 
