@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.proyectoparcial1clasesabraham.model;
 
+import ec.edu.espol.proyectoparcial1clasesabraham.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
-import jdk.jshell.execution.Util;
+
 
 /**
  *
@@ -146,7 +147,7 @@ public class Criterio {
         sb.append("Criterio No. " + this.idCriterio +"\n Nombre del criterio: "+ this.nombre+ "\n Descripcion: " + this.descripcion+ "\n Puntaje máximo: "+this.puntajeMax);
         sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + concursos.getNombre()+"\n Fecha: " + concursos.getFecha() +"/n Fecha de Inscripción: " + concursos.getFechaInscripcion() + "/n Fecha de cierre de Inscripción: " + concursos.getFechaCierreInscripcion()+ "/n Temática: " + concursos.getTematica() + "/n Costo: " + concursos.getCosto());
         for(Evaluacion evaluacion : evaluaciones)
-            sb.append("Evaluaciones No. "+this.idEvaluacion+"\n Calificacion: "+evaluacion.getCalificacion);
+            sb.append("Evaluaciones No. "+this.idEvaluacion+"\n Calificacion: "+evaluacion.getCalificacion());
         return sb.toString();
     }
     
@@ -186,7 +187,7 @@ public class Criterio {
         String namec = sc.nextLine();
         System.out.println("Ingrese la descripción del criterio: ");
         String dp = sc.nextLine();
-        System.out.println("Ingrese el puntaje máximo, si es un entero agreguele .0: ");
+        System.out.println("Ingrese el puntaje máximo: ");
         Double pm = sc.nextDouble();
         Criterio cr1 = new Criterio(idcr,idc, namec, dp, pm);
         return cr1;
@@ -194,13 +195,13 @@ public class Criterio {
     
     //Metodo para sacar el email del dueño
     
-    public static int opcion2(Scanner sc){
+    public static int opcion5(Scanner sc){
         System.out.println("Por favor ingrese el nombre del concurso al que pertenecen esos premios: \n");
         String nb = sc.nextLine();
         int indic = 0;
         ArrayList<Concurso> concurso = Concurso.readFromFile("concursos.txt");
         for(Concurso c : concurso){
-            if(Objects.equals(c.getNombre,nb)){
+            if(Objects.equals(c.getNombre(),nb)){
                 indic = concurso.indexOf(c);
                 return indic;
             }
