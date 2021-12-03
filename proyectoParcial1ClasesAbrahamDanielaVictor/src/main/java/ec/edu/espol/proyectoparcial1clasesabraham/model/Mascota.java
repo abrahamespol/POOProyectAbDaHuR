@@ -184,13 +184,10 @@ public class Mascota {
     }
     
     //Metodo para buscar el nombre de Mascota y Obtenerla
-        public static Mascota obtenerMascotaXNombre(Scanner sc){
+        public static Mascota obtenerMascotaXNombre(String nombre){
         ArrayList<Mascota> mascotas = Mascota.readFromFile("mascotas.txt");
-        sc.useDelimiter("\n");
-        System.out.println("Ingrese el nombre de la Mascota inscrita: ");
-        String msctNomb = sc.next();
         for(Mascota msc : mascotas){
-            if(Objects.equals(msc.nombre, msctNomb))
+            if(Objects.equals(msc.nombre, nombre))
                  return msc;   
         }
         return null;

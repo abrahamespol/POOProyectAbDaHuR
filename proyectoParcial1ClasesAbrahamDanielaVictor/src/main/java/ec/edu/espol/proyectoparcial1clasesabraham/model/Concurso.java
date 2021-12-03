@@ -208,13 +208,10 @@ public class Concurso {
         return con;
     }
 
-    public static Concurso obtenerConcursoXNombre(Scanner sc){
+    public static Concurso obtenerConcursoXNombre(String nombre){
         ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
-        sc.useDelimiter("\n");
-        System.out.println("Ingrese el nombre del Concurso al que pertenecen sus premios: ");
-        String nombreP = sc.next();
         for(Concurso c : concursos){
-            if(Objects.equals(c.nombre,nombreP))
+            if(Objects.equals(c.nombre,nombre))
                  return c;   
         }
         return null;

@@ -111,17 +111,13 @@ public class MiembroJurado extends Persona{
         String descrp = sc.nextLine();
         MiembroJurado mj = new MiembroJurado(idm, nb, ap, tlf, mail, descrp);
         return mj;
+    }    
+        public static MiembroJurado obtenerMiembroJuradoXNombre(String nombre){
+        ArrayList<MiembroJurado> jueces = MiembroJurado.readFromFile("miembroJurados.txt");
+        for(MiembroJurado miembro: jueces){
+            if(Objects.equals(miembro.nombre,nombre))
+                 return miembro;   
+        }
+        return null;
     }
-//    
-//        public static MiembroJurado obtenerMiembroJuradoXNombre(Scanner sc){
-//        ArrayList<MiembroJurado> jueces = MiembroJurado.readFromFile("miembroJurados.txt");
-//        sc.useDelimiter("\n");
-//        System.out.println("Ingrese el nombre del Miembro del Jurado que realiza la evaluacion: ");
-//        String nombre1 = sc.next();
-//        for(MiembroJurado miembro: jueces){
-//            if(Objects.equals(miembro.nombre,nombre1))
-//                 return miembro;   
-//        }
-//        return null;
-//    }
 }
