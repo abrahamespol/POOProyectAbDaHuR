@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -151,9 +150,9 @@ public class Concurso {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + this.nombre+"\n Fecha: " + this.fecha +"/n Fecha de Inscripción: " + this.fechaInscripcion + "/n Fecha de cierre de Inscripción: " + this.fechaCierreInscripcion+ "/n Temática: " + this.tematica + "/n Costo: " + this.costo);
+        sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + this.nombre+"\n Fecha: " + this.fecha +"/n Fecha de Inscripción: " + this.fechaInscripcion + "/n Fecha de cierre de Inscripción: " + this.fechaCierreInscripcion+ "/n Temática: " + this.tematica);
         for(Inscripcion ins : inscripcion)
-            sb.append("\n Mascota"+ins.getMascota()+"\n Descuento: "+ins.getDescuento()+"\n Valor a pagar:"+ins.getValor());
+            sb.append("\n Descuento: "+ins.getDescuento()+"\n Valor a pagar:"+ins.getCostoInscripcion());
         
         for(Premio premio : premios)
             sb.append("\n El premio: "+ premio.getDescripcion() + " está destinado para el "+ premio.getPuesto() +"lugar. \n");
@@ -167,7 +166,7 @@ public class Concurso {
     
      public void saveFile(String nomFile){ 
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile)))){
-            pw.println(Util.nextID(nomFile)+ "|" + this.nombre+"|" + this.fecha +"|" + this.fechaInscripcion + "|" + this.fechaCierreInscripcion+ "|" + this.tematica + "|" + this.costo);
+            pw.println(Util.nextID(nomFile)+ "|" + this.nombre+"|" + this.fecha +"|" + this.fechaInscripcion + "|" + this.fechaCierreInscripcion+ "|" + this.tematica);
             
         }
         catch(Exception e){
