@@ -25,7 +25,7 @@ public class Criterio {
     private String descripcion;
     private double puntajeMax;
     private ArrayList<Evaluacion> evaluaciones;
-    private int idEvaluacion;
+    //private int idEvaluacion;
     private int idConcurso;
     private Concurso concursos;
     
@@ -40,13 +40,13 @@ public class Criterio {
     }
     
 
-    public Criterio(int idCriterio, String nombre, String descripcion, double puntajeMax, ArrayList<Evaluacion> evaluaciones, int idEvaluacion, int idConcurso, Concurso concursos) {
+    public Criterio(int idCriterio, String nombre, String descripcion, double puntajeMax, ArrayList<Evaluacion> evaluaciones,/* int idEvaluacion, */int idConcurso, Concurso concursos) {
         this.idCriterio = idCriterio;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.puntajeMax = puntajeMax;
         this.evaluaciones = new ArrayList<> ();
-        this.idEvaluacion = idEvaluacion;
+//        this.idEvaluacion = idEvaluacion;
         this.idConcurso = idConcurso;
         this.concursos = concursos;
     }
@@ -71,9 +71,9 @@ public class Criterio {
         return this.evaluaciones;
     }
 
-    public int getIdEvaluacion() {
-        return this.idEvaluacion;
-    }
+//    public int getIdEvaluacion() {
+//        return this.idEvaluacion;
+//    }
 
     public int getIdConcurso() {
         return this.idConcurso;
@@ -103,10 +103,10 @@ public class Criterio {
         this.evaluaciones = evaluaciones;
     }
 
-    public void setIdEvaluacion(int idEvaluacion) {
-        this.idEvaluacion = idEvaluacion;
-    }
-
+//    public void setIdEvaluacion(int idEvaluacion) {
+//        this.idEvaluacion = idEvaluacion;
+//    }
+//
     public void setIdConcurso(int idConcurso) {
         this.idConcurso = idConcurso;
     }
@@ -141,7 +141,8 @@ public class Criterio {
         sb.append("Criterio No. " + this.idCriterio +"\n Nombre del criterio: "+ this.nombre+ "\n Descripcion: " + this.descripcion+ "\n Puntaje máximo: "+this.puntajeMax);
         sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + concursos.getNombre()+"\n Fecha: " + concursos.getFecha() +"/n Fecha de Inscripción: " + concursos.getFechaInscripcion() + "/n Fecha de cierre de Inscripción: " + concursos.getFechaCierreInscripcion()+ "/n Temática: " + concursos.getTematica());
         for(Evaluacion evaluacion : evaluaciones)
-            sb.append("Evaluaciones No. "+this.idEvaluacion+"\n Calificacion: "+evaluacion.getNota());
+            //sb.append("Evaluaciones No. "+this.idEvaluacion+"\n Calificacion: "+evaluacion.getNota());
+            sb.append("Calificacion de evaluacion: "+evaluacion.getCalificacion());
         return sb.toString();
     }
     
