@@ -9,6 +9,8 @@ import ec.edu.espol.proyectoparcial1clasesabraham.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -23,7 +25,7 @@ public class Concurso {
 
     private int idConcurso;
     private String nombre;
-    private Date fecha;
+    private LocalDateTime fecha;
     private Date fechaInscripcion;
     private Date fechaCierreInscripcion;
     private String tematica;
@@ -31,7 +33,7 @@ public class Concurso {
     private ArrayList<Premio> premios;
     private ArrayList<Criterio> criterio;
     
-    //si no hacemos un constructor sin argumentos lo que hace Abraham en sus constructores sale error
+    
     public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica) {
         this.idConcurso = idConcurso;
         this.nombre = nombre;
@@ -178,7 +180,7 @@ public class Concurso {
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");// revisar video
-                Concurso con = new Concurso(Integer.parseInt(tokens[0]),tokens[1],(tokens[2]),(tokens[3]),(tokens[4]),tokens[5],Double.parseDouble(tokens[6]));
+                Concurso con = new Concurso(Integer.parseInt(tokens[0]),tokens[1],(tokens[2]),(tokens[3]),(tokens[4]),tokens[5]);
                 concurso.add(con);
             }
         }
@@ -195,16 +197,15 @@ public class Concurso {
         String name = sc.next();//no sé porque pusiste el next y después el nextLine porque podía solo poner el next line y ya, pero lo pongo por si acaso
         String name1 = sc.nextLine();
         System.out.println("Ingrese la fecha del concurso: ");
-        Date f = sc.nextDate();//Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
-        System.out.println("Ingrese la fecha de incripción del concurso: ");
+        String f = sc.next();
+        LocalDateTime dateC = LocalDateTime.parse(f);
+        System.out.println("Ingrese la fecha de incripción del concurso en este orden año,mes,día: ");
         Date fi = sc.nextDate();//Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
         System.out.println("Ingrese la fecha de cierre de incripción del consurso: ");
         Date fc = sc.nextDate(); //Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
         System.out.println("Ingrese la temática del concurso: ");
         String tm = sc.nextLine();
-        System.out.println("Ingrese el costo del consurso: ");
-        Double ct = sc.nextDouble();
-        Concurso con = new Concurso(idc, name1, f, fi, fc,tm,ct);
+        Concurso con = new Concurso(idc, name1, dateC, fi, fc,tm);
         return con;
     }
 

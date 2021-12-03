@@ -195,4 +195,8 @@ public class Mascota {
         }
         return null;
     }    
+        public static int Opcion2(Scanner sc){
+            System.out.println("Por favor ingrese el email del dueño: ");
+            
+        }
 }
