@@ -120,7 +120,7 @@ public class Inscripcion {
         System.out.println("Ingrese el nombre del concurso: ");
         sc.useDelimiter("\n");
         String nombre_concurso = sc.next();
-        System.out.println("Ingrese la fecha de inscripcion en el formato: año,mes,dia");
+        System.out.println("Ingrese la fecha de inscripcion en el formato: año-mes-dia");
         sc.useDelimiter(",");
         LocalDate fecha = LocalDate.parse(sc.next());
         System.out.println("Ingrese el costo de inscripcion: ");
@@ -129,5 +129,4 @@ public class Inscripcion {
         return new_inscrip;
     }
     
-
 }
