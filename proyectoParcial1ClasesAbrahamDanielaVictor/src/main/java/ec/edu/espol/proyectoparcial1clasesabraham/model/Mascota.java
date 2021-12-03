@@ -36,7 +36,7 @@ public class Mascota {
         this.idDueño = idDueño;
         this.nombre = nombre;
         this.raza = raza;
-        this.fechaNacimiento = LocalDate.of(0, 0, 0);
+        this.fechaNacimiento = fechaNacimiento;
         this.tipo = tipo;
     }
 
@@ -44,7 +44,7 @@ public class Mascota {
         this.idMascota = idMascota;
         this.nombre = nombre;
         this.raza = raza;
-        this.fechaNacimiento = LocalDate.of(0, 0, 0);
+        this.fechaNacimiento = fechaNacimiento;
         this.tipo = tipo;
         this.idDueño = idDueño;
         this.dueño = dueño;
@@ -179,10 +179,8 @@ public class Mascota {
         System.out.println("Ingrese la raza de su mascota: ");
         String raz = sc.nextLine();
         System.out.println("Ingrese la fecha de nacimiento de su mascota: ");
-        sc.useDelimiter(",");
-        sc.useLocale(Locale.US);
-        String fechaNac = sc.next();
-        LocalDate fn = LocalDate.parse(fechaNac); //Constructor y en los get y set le puse Local Time en vez de Date
+        //String fechaNac = sc.next();
+        LocalDate fn = LocalDate.parse(sc.next()); 
         Mascota mas1 = new Mascota(idm,idD, name1, tip, raz, fn);
         return mas1;
     }
