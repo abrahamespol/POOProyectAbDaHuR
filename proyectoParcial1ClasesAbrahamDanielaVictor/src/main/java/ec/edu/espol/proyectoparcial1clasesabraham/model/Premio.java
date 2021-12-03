@@ -81,7 +81,7 @@ public class Premio {
     
     @Override
     public String toString(){
-        return "El premio "+this.descripcion+" de ID "+this.id+"  para el Concurso No. "+this.idConcurso+", esta destinado al lugar No. "+this.puesto;
+        return "El premio "+this.descripcion+" de ID "+this.id+"  para el Concurso No. "+concurso.getIdConcurso()+", esta destinado al lugar No. "+this.getPuesto();
     }
 
     //Guardar Objetos Premio en un archivo de estos
@@ -127,17 +127,5 @@ public class Premio {
         Premio pr = new Premio(idp, idC, plP, descrP);/*, nullESTO ES HASTA NUEVO AVISO, OSEA HASTA CREAR EL METODO MENU DENTRO DE LA CLASE UTIL*/
         return pr;
     }
-    public static int opcion4(Scanner sc){
-        System.out.println("\n Ingrese el nombre del Concurso, del cual ingreso los Premios:\n");
-        String name = sc.nextLine();
-        int indiC = 0;
-        ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
-        for(Concurso c : concursos){
-            if(Objects.equals(c.getNombre(),name)){
-                indiC = concursos.indexOf(c);
-                return indiC;
-            }
-        }
-        return -1;
-    }
+
 }

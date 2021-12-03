@@ -20,6 +20,7 @@ import java.util.Scanner;
  * @author Lenovo
  */
 public class Mascota {
+
     private int idMascota;
     private String nombre;
     private String raza;
@@ -133,9 +134,9 @@ public class Mascota {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Macota No. " + this.idMascota + "\n Nombre de la mascota: " + this.nombre+"\n Tipo de animal: " + this.tipo +"/n Raza de la mascota: " + this.raza + "/n Fecha de nacimiento: " + this.fechaNacimiento+ "Pertenece a /n"+ "Id de Dueño: "+dueño.getIddueño+"/n Nombre: "+dueño.getNombre+", Apellidos: "+ dueño.getApellido);
+        sb.append("Macota No. " + this.idMascota + "\n Nombre de la mascota: " + this.nombre+"\n Tipo de animal: " + this.tipo +"/n Raza de la mascota: " + this.raza + "/n Fecha de nacimiento: " + this.fechaNacimiento+ "Pertenece a /n"+ "Id de Dueño: "+dueño.getId()+"/n Nombre: "+dueño.getNombre()+", Apellidos: "+ dueño.getApellidos());
         for(Inscripcion inscripcion : inscripciones)
-            sb.append("\n Costo de la inscripcion: "+inscripcion.getCostoInscripcion+"/n Fecha de inscripción: "+inscripcion.getFechaInscripcion);
+            sb.append("\n Costo de la inscripcion: "+inscripcion.getCostoInscripcion()+"/n Fecha de inscripción: "+inscripcion.getFechaInscripcion());
         return sb.toString();
     }
     
@@ -182,23 +183,16 @@ public class Mascota {
         return mas1;
     }
     
-    //Metodo para sacar el email del dueño
-    
-    public static int opcion2(Scanner sc){
-        System.out.println("Por favor ingrese el email del dueño de la mascota: \n");
-        String em = sc.nextLine();
-        int indiD = 0;
-        ArrayList<Dueño> dueños = Dueño.readFromFile("dueños.txt");
-        for(Dueño d : dueños){
-            if(Objects.equals(d.getEmail(),em)){
-                indiD = dueños.indexOf(d);
-                return indiD;
-            }
+    //Metodo para buscar el nombre de Mascota y Obtenerla
+        public static Mascota obtenerMascotaXNombre(Scanner sc){
+        ArrayList<Mascota> mascotas = Mascota.readFromFile("mascotas.txt");
+        sc.useDelimiter("\n");
+        System.out.println("Ingrese el nombre de la Mascota inscrita: ");
+        String msctNomb = sc.next();
+        for(Mascota msc : mascotas){
+            if(Objects.equals(msc.nombre, msctNomb))
+                 return msc;   
         }
-        return -1;
-    }
-    
-            
-    
-    
+        return null;
+    }    
 }

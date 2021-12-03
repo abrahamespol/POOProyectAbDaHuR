@@ -111,5 +111,30 @@ public class Dueño extends Persona{
         Dueño neoDu = new Dueño(idd, nom, apell, phoNum, email, direction);
         return neoDu;
     }
+    //Obtener Dueño por email
+    public static Dueño obtenerDueñoXEmail(Scanner sc){
+        ArrayList<Dueño> dueños = Dueño.readFromFile("dueños.txt");
+        sc.useDelimiter("\n");
+        System.out.println("Ingrese el email del Dueño/a de la mascota: ");
+        String email1 = sc.next();
+        for(Dueño dF : dueños){
+            if(Objects.equals(dF.email,email1))
+                 return dF;   
+        }
+        return null;
+    }
+    
+    //Obtener Dueño por nombre
+    public static Dueño obtenerDueñoXNombre(Scanner sc){
+        ArrayList<Dueño> dueños = Dueño.readFromFile("dueños.txt");
+        sc.useDelimiter("\n");
+        System.out.println("Ingrese el nombre del Dueño/a de la mascota: ");
+        String nombre1 = sc.next();
+        for(Dueño dF : dueños){
+            if(Objects.equals(dF.nombre,nombre1))
+                 return dF;   
+        }
+        return null;
+    }    
 
 }

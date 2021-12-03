@@ -13,6 +13,7 @@ import ec.edu.espol.proyectoparcial1clasesabraham.model.MiembroJurado;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Premio;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -69,11 +70,13 @@ public class Util {
                 case 2:
                     System.out.println("Por favor ingrese los datos de la Mascota\n");
                     Mascota mascota1 = Mascota.nextMascota(sc);
-                    int indD = 0;
+                    Dueño dueno = null;
+                    int idD = 0;
                     do{
-                        indD = Mascota.opcion2(sc);
-                    }while(indD<0);
-                    mascota1.setIdDueño(indD);
+                        dueno = Dueño.obtenerDueñoXEmail(sc);
+                    }while(dueno == null);
+                    idD = dueno.getId();
+                    mascota1.setIdDueño(idD);
                     mascota1.saveFile("mascotas.txt");
                     break;
                 
@@ -94,14 +97,16 @@ public class Util {
                         //añade cada premio en esta lista
                         awrdsCntst.add(p);
                     }
-                    int indP = 0;
+                    int idC = 0;
+                    Concurso conc = null;
                     do{
-                        indP = Premio.opcion4(sc);
-                    }while(indP<0);
-                    for(Premio pri : awrdsCntst){
-                            pri.setIdConcurso(indP);
-                            pri.saveFile("premios.txt");
-                    }   
+                        conc = Concurso.obtenerConcursoXNombre(sc); 
+                    }while(conc == null);
+                    idC = conc.getIdConcurso();
+                    for(Premio p: awrdsCntst){
+                        p.setIdConcurso(idC);
+                        p.saveFile("premios.txt");
+                    }
                     break;
 
                 case 5:
@@ -114,17 +119,36 @@ public class Util {
                         lst_crit.add(c);
                     }
                     int indC = 0;
+                    Concurso con = null;
                     do{
-                        indC = Criterio.opcion5(sc);
-                    }while(indC<0);
-                    for(Criterio crit : lst_crit){
+                        con =  Concurso.obtenerConcursoXNombre(sc); 
+                    }while(con == null);
+                    indC = con.getIdConcurso();                    
+                    for(Criterio crit: lst_crit){
                         crit.setIdConcurso(indC);
                         crit.saveFile("criterios.txt");
-                    }                    
+                    }
                     break;
-                
-                case 6:
                     
+                case 6:
+                    sc.useDelimiter("\n");
+                    int indMc = 0;
+                    Mascota msc = null;
+                    do{
+                        msc =  Mascota.obtenerMascotaXNombre(sc); 
+                    }while(msc == null);
+                    indMc = msc.getIdMascota();
+                    int idCo = 0;
+                    Concurso conco = null;
+                    do{
+                        conco =  Concurso.obtenerConcursoXNombre(sc); 
+                    }while(conco == null);
+                    idCo = conco.getIdConcurso();
+                    System.out.println("Ingrese el costo de la Inscripcion: ");
+                    double costoI = sc.nextDouble();
+                    System.out.println("Ingrese Fecha de Inscripcion: ");
+//                    Implementacion de ingreso de fecha, AGREGAR
+//                    Guardar Inscripcion en su archivo "inscripciones.txt" usando los datos indMc e idCo (idMascota e idConcurso segun el nombre ingresado de c/u)
                     break;
                 
                 case 7:

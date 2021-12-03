@@ -20,39 +20,36 @@ import java.util.Scanner;
  * @author Lenovo
  */
 public class Concurso {
+
     private int idConcurso;
     private String nombre;
     private Date fecha;
     private Date fechaInscripcion;
     private Date fechaCierreInscripcion;
     private String tematica;
-    private double costo;
     private ArrayList<Inscripcion> inscripcion;
     private ArrayList<Premio> premios;
     private ArrayList<Criterio> criterio;
     
     //si no hacemos un constructor sin argumentos lo que hace Abraham en sus constructores sale error
-    public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica, double costo) {
+    public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica) {
         this.idConcurso = idConcurso;
         this.nombre = nombre;
         this.fecha = fecha;
         this.fechaInscripcion = fechaInscripcion;
         this.fechaCierreInscripcion = fechaCierreInscripcion;
-        this.tematica = tematica;
-        this.costo = costo;
-        
+        this.tematica = tematica;        
     }
     
     
 
-    public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica, double costo, ArrayList<Inscripcion> inscripcion, ArrayList<Premio> premios, ArrayList<Criterio> criterio) {
+    public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica, ArrayList<Inscripcion> inscripcion, ArrayList<Premio> premios, ArrayList<Criterio> criterio) {
         this.idConcurso = idConcurso;
         this.nombre = nombre;
         this.fecha = fecha;
         this.fechaInscripcion = fechaInscripcion;
         this.fechaCierreInscripcion = fechaCierreInscripcion;
         this.tematica = tematica;
-        this.costo = costo;
         this.inscripcion = new ArrayList<> ();
         this.premios = new ArrayList<> ();
         this.criterio = new ArrayList<> ();
@@ -80,10 +77,6 @@ public class Concurso {
 
     public String getTematica() {
         return this.tematica;
-    }
-
-    public double getCosto() {
-        return this.costo;
     }
 
     public ArrayList<Inscripcion> getInscripcion() {
@@ -120,10 +113,6 @@ public class Concurso {
 
     public void setTematica(String tematica) {
         this.tematica = tematica;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
     }
 
     public void setInscripcion(ArrayList<Inscripcion> inscripcion) {
@@ -218,14 +207,17 @@ public class Concurso {
         Concurso con = new Concurso(idc, name1, f, fi, fc,tm,ct);
         return con;
     }
-    
-    
-    
-    
-    
 
-    
-    
-    
+    public static Concurso obtenerConcursoXNombre(Scanner sc){
+        ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
+        sc.useDelimiter("\n");
+        System.out.println("Ingrese el nombre del Concurso al que pertenecen sus premios: ");
+        String nombreP = sc.next();
+        for(Concurso c : concursos){
+            if(Objects.equals(c.nombre,nombreP))
+                 return c;   
+        }
+        return null;
+    }        
     
 }

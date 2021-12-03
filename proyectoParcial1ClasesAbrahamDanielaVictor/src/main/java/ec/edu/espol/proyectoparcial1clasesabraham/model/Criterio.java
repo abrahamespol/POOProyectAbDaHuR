@@ -186,20 +186,4 @@ public class Criterio {
         Criterio cr1 = new Criterio(idcr,idc, namec, dp, pm);
         return cr1;
     }
-    
-    //Metodo para sacar el email del dueño
-    
-    public static int opcion5(Scanner sc){
-        System.out.println("Por favor ingrese el nombre del concurso al que pertenecen esos premios: \n");
-        String nb = sc.nextLine();
-        int indic = 0;
-        ArrayList<Concurso> concurso = Concurso.readFromFile("concursos.txt");
-        for(Concurso c : concurso){
-            if(Objects.equals(c.getNombre(),nb)){
-                indic = concurso.indexOf(c);
-                return indic;
-            }
-        }
-        return -1;
-    }
 }
