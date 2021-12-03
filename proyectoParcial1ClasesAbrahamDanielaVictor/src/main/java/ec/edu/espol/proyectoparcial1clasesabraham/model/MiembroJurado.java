@@ -120,4 +120,16 @@ public class MiembroJurado extends Persona{
         }
         return null;
     }
+        public static MiembroJurado obtenerConcursoXNombre(Scanner sc){
+        ArrayList<MiembroJurado> jueces = MiembroJurado.readFromFile("miembroJurados.txt");
+        sc.useDelimiter("\n");
+        System.out.println("Ingrese el nombre del Miembro del Jurado que realiza la evaluacion: ");
+        String nombre1= sc.next();
+        for(MiembroJurado miembro: jueces){
+            if(Objects.equals(miembro.nombre,nombre1))
+                 return miembro;   
+        }
+        return null;
+    }        
+        
 }

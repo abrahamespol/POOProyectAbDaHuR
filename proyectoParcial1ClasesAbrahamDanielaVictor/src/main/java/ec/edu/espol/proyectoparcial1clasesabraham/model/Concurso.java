@@ -226,5 +226,16 @@ public class Concurso {
         }
         return null;
     }        
-    
+    public static Concurso obtenerConcursoXNombre(Scanner sc){
+        ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
+        sc.useDelimiter("\n");
+        System.out.println("Ingrese el nombre del Concurso: ");
+        String nombre1= sc.next();
+        for(Concurso c : concursos){
+            if(Objects.equals(c.nombre,nombre1))
+                 return c;   
+        }
+        return null;
+    }        
+        
 }
