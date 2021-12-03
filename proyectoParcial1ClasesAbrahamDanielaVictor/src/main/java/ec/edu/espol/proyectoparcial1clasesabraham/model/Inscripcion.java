@@ -100,18 +100,16 @@ public class Inscripcion {
         System.out.println("Ingrese el nombre de la mascota: ");
         sc.useDelimiter("\n");
         sc.useLocale(Locale.US);
-        String nombre_mascota=sc.next();
+        String nombre_mascota = sc.next();
         System.out.println("Ingrese el nombre del concurso: ");
         sc.useDelimiter("\n");
-        sc.useLocale(Locale.US);
-        String nombre_concurso= sc.next();
-        System.out.println("Ingrese la fecha de inscripcion en el formato año,mes,dia");
+        String nombre_concurso = sc.next();
+        System.out.println("Ingrese la fecha de inscripcion en el formato: año,mes,dia");
         sc.useDelimiter(",");
-        sc.useLocale(Locale.US);
-        LocalDate fecha=LocalDate.parse(sc.next());
+        LocalDate fecha = LocalDate.parse(sc.next());
         System.out.println("Ingrese el costo de inscripcion: ");
-        Double costo= sc.nextDouble();
-        Inscripcion new_inscrip= new Inscripcion(Util.nextID("inscripciones.txt"),Mascota.obtenerMascotaXNombre(nombre_mascota).getIdMascota(),Concurso.obtenerConcursoXNombre(nombre_concurso).getIdConcurso(),fecha,costo);
+        double costo = sc.nextDouble();
+        Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),Mascota.obtenerMascotaXNombre(nombre_mascota).getIdMascota(),Concurso.obtenerConcursoXNombre(nombre_concurso).getIdConcurso(),fecha,costo);
         return new_inscrip;
     }
         

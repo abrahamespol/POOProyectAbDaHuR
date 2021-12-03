@@ -117,7 +117,7 @@ public class Premio {
     
     
     
-    public static Premio nextPremio(Scanner sc){/* ESTO NO VA, LEE EL DOCUMENTO QUE ESCRIBISTE, Concurso c){*/
+    public static Premio nextPremio(Scanner sc){
         int idp = Util.nextID("dueños.txt");
         int idC = 0; // este valor default se da a proposito, para luego hacer set en el por medio de la funcion menu
         System.out.println("Ingrese el puesto respectivo de su Premio");

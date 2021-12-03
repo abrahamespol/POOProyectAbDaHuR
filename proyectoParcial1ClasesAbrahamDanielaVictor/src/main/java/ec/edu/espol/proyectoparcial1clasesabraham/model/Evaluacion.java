@@ -110,13 +110,13 @@ public class Evaluacion {
         return evaluaciones;
     }    
     public static Evaluacion nextEvaluacion(Scanner sc){
-        System.out.println("Ingrese el nombre del Miembro del Jurado: ");
+        System.out.println("Ingrese el email del Miembro del Jurado: ");
         sc.useDelimiter("\n");
         sc.useLocale(Locale.US);
-        String nombreJurado=sc.next();
+        String emailJurado = sc.next();
         System.out.println("Ingrese la calificacion");
         double nota=sc.nextDouble();
-        Evaluacion new_eva= new Evaluacion(Util.nextID("evaluaciones.txt"),/*Colocar el valor del id de la inscripcion buscada de acuerdo al nombre del concurso*/ ,MiembroJurado.obtenerMiembroJuradoXNombre(nombreJurado),/*Colocar el */ ,nota);
+        Evaluacion new_eva = new Evaluacion(Util.nextID("evaluaciones.txt"),/*Colocar el valor del id de la inscripcion buscada de acuerdo al nombre del concurso*/ MiembroJurado.obtenerMiembroJuradoXEmail(emailJurado),/*Colocar el  ,*/nota);
         
         return new_eva;
     }

@@ -8,6 +8,7 @@ package ec.edu.espol.proyectoparcial1clasesabraham.util;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Concurso;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Criterio;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Dueño;
+import ec.edu.espol.proyectoparcial1clasesabraham.model.Inscripcion;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Mascota;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.MiembroJurado;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Premio;
@@ -132,21 +133,23 @@ public class Util {
                     
                 case 6:
                     sc.useDelimiter("\n");
-                    int indMc = 0;
-                    Mascota msc = null;
-                    do{
-                        msc =  Mascota.obtenerMascotaXNombre(sc); 
-                    }while(msc == null);
-                    indMc = msc.getIdMascota();
-                    int idCo = 0;
-                    Concurso conco = null;
-                    do{
-                        conco =  Concurso.obtenerConcursoXNombre(sc); 
-                    }while(conco == null);
-                    idCo = conco.getIdConcurso();
-                    System.out.println("Ingrese el costo de la Inscripcion: ");
-                    double costoI = sc.nextDouble();
-                    System.out.println("Ingrese Fecha de Inscripcion: ");
+                    Inscripcion inscp = Inscripcion.nextInscripcion(sc);  
+                    inscp.saveFile("inscripciones.txt");                  
+//                    int indMc = 0;
+//                    Mascota msc = null;
+//                    do{
+//                        msc =  Mascota.obtenerMascotaXNombre(sc); 
+//                    }while(msc == null);
+//                    indMc = msc.getIdMascota();
+//                    int idCo = 0;
+//                    Concurso conco = null;
+//                    do{
+//                        conco =  Concurso.obtenerConcursoXNombre(sc); 
+//                    }while(conco == null);
+//                    idCo = conco.getIdConcurso();
+//                    System.out.println("Ingrese el costo de la Inscripcion: ");
+//                    double costoI = sc.nextDouble();
+//                    System.out.println("Ingrese Fecha de Inscripcion: ");
 //                    Implementacion de ingreso de fecha, AGREGAR
 //                    Guardar Inscripcion en su archivo "inscripciones.txt" usando los datos indMc e idCo (idMascota e idConcurso segun el nombre ingresado de c/u)
                     break;
