@@ -9,8 +9,7 @@ import ec.edu.espol.proyectoparcial1clasesabraham.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -25,16 +24,16 @@ public class Concurso {
 
     private int idConcurso;
     private String nombre;
-    private LocalDateTime fecha;
-    private Date fechaInscripcion;
-    private Date fechaCierreInscripcion;
+    private LocalTime fecha;
+    private LocalTime fechaInscripcion;
+    private LocalTime fechaCierreInscripcion;
     private String tematica;
     private ArrayList<Inscripcion> inscripcion;
     private ArrayList<Premio> premios;
     private ArrayList<Criterio> criterio;
     
     
-    public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica) {
+    public Concurso(int idConcurso, String nombre, LocalTime fecha, LocalTime fechaInscripcion, LocalTime fechaCierreInscripcion, String tematica) {
         this.idConcurso = idConcurso;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -45,7 +44,7 @@ public class Concurso {
     
     
 
-    public Concurso(int idConcurso, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica, ArrayList<Inscripcion> inscripcion, ArrayList<Premio> premios, ArrayList<Criterio> criterio) {
+    public Concurso(int idConcurso, String nombre, LocalTime fecha, LocalTime fechaInscripcion, LocalTime fechaCierreInscripcion, String tematica, ArrayList<Inscripcion> inscripcion, ArrayList<Premio> premios, ArrayList<Criterio> criterio) {
         this.idConcurso = idConcurso;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -65,15 +64,15 @@ public class Concurso {
         return this.nombre;
     }
 
-    public Date getFecha() {
+    public LocalTime getFecha() {
         return this.fecha;
     }
 
-    public Date getFechaInscripcion() {
+    public LocalTime getFechaInscripcion() {
         return this.fechaInscripcion;
     }
 
-    public Date getFechaCierreInscripcion() {
+    public LocalTime getFechaCierreInscripcion() {
         return this.fechaCierreInscripcion;
     }
 
@@ -101,15 +100,15 @@ public class Concurso {
         this.nombre = nombre;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalTime fecha) {
         this.fecha = fecha;
     }
 
-    public void setFechaInscripcion(Date fechaInscripcion) {
+    public void setFechaInscripcion(LocalTime fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 
-    public void setFechaCierreInscripcion(Date fechaCierreInscripcion) {
+    public void setFechaCierreInscripcion(LocalTime fechaCierreInscripcion) {
         this.fechaCierreInscripcion = fechaCierreInscripcion;
     }
 
@@ -197,15 +196,17 @@ public class Concurso {
         String name = sc.next();//no sé porque pusiste el next y después el nextLine porque podía solo poner el next line y ya, pero lo pongo por si acaso
         String name1 = sc.nextLine();
         System.out.println("Ingrese la fecha del concurso: ");
-        String f = sc.next();
-        LocalDateTime dateC = LocalDateTime.parse(f);
+        String fechaText = sc.next();
+        LocalTime f = LocalTime.parse(fechaText);
         System.out.println("Ingrese la fecha de incripción del concurso en este orden año,mes,día: ");
-        Date fi = sc.nextDate();//Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
+        String fechaTextoIns = sc.next();
+        LocalTime fi = LocalTime.parse(fechaTextoIns);//cAMBIO DE FECHAS
         System.out.println("Ingrese la fecha de cierre de incripción del consurso: ");
-        Date fc = sc.nextDate(); //Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
+        String fechaTextCierre = sc.next();
+        LocalTime fc = LocalTime.parse(fechaTextCierre);
         System.out.println("Ingrese la temática del concurso: ");
         String tm = sc.nextLine();
-        Concurso con = new Concurso(idc, name1, dateC, fi, fc,tm);
+        Concurso con = new Concurso(idc, name1,f, fi, fc,tm);
         return con;
     }
 

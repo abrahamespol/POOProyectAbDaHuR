@@ -9,6 +9,9 @@ import ec.edu.espol.proyectoparcial1clasesabraham.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+
+
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -24,13 +27,13 @@ public class Mascota {
     private int idMascota;
     private String nombre;
     private String raza;
-    private Date fechaNacimiento;
+    private LocalTime fechaNacimiento;
     private String tipo;
     private int idDueño;
     private Dueño dueño;
     private ArrayList<Inscripcion> inscripciones;
     
-     public Mascota(int idMascota,int idDueño, String nombre, String tipo, String raza, Date fechaNacimiento) {
+     public Mascota(int idMascota,int idDueño, String nombre, String tipo, String raza, LocalTime fechaNacimiento) {
         this.idMascota = idMascota;
         this.idDueño = idDueño;
         this.nombre = nombre;
@@ -39,7 +42,7 @@ public class Mascota {
         this.tipo = tipo;
     }
 
-    public Mascota(int idMascota, String nombre, String tipo, String raza, Date fechaNacimiento, int idDueño, Dueño dueño, ArrayList<Inscripcion> inscripciones) {
+    public Mascota(int idMascota, String nombre, String tipo, String raza, LocalTime fechaNacimiento, int idDueño, Dueño dueño, ArrayList<Inscripcion> inscripciones) {
         this.idMascota = idMascota;
         this.nombre = nombre;
         this.raza = raza;
@@ -62,7 +65,7 @@ public class Mascota {
         return this.raza;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalTime getFechaNacimiento() {
         return this.fechaNacimiento;
     }
 
@@ -94,7 +97,7 @@ public class Mascota {
         this.raza = raza;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -178,8 +181,9 @@ public class Mascota {
         System.out.println("Ingrese la raza de su mascota: ");
         String raz = sc.nextLine();
         System.out.println("Ingrese la fecha de nacimiento de su mascota: ");
-        Date fechaNac = sc.nextDate(); //Tengo que ver un video del ayudante donde explica lo de las fechas porque no me acuerdo
-        Mascota mas1 = new Mascota(idm,idD, name1, tip, raz, fechaNac);
+        String fechaNac = sc.next();
+        LocalTime fn = LocalTime.parse(fechaNac); //Constructor y en los get y set le puse Local Time en vez de Date
+        Mascota mas1 = new Mascota(idm,idD, name1, tip, raz, fn);
         return mas1;
     }
     
@@ -195,8 +199,5 @@ public class Mascota {
         }
         return null;
     }    
-        public static int Opcion2(Scanner sc){
-            System.out.println("Por favor ingrese el email del dueño: ");
-            
-        }
+        
 }
