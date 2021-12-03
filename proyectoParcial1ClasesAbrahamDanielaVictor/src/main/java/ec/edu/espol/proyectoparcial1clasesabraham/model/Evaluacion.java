@@ -114,10 +114,20 @@ public class Evaluacion {
         sc.useDelimiter("\n");
         sc.useLocale(Locale.US);
         String emailJurado = sc.next();
-        System.out.println("Ingrese la calificacion");
+        System.out.println("Ingrese la calificacion: ");
         double nota=sc.nextDouble();
-        Evaluacion new_eva = new Evaluacion(Util.nextID("evaluaciones.txt"),/*Colocar el valor del id de la inscripcion buscada de acuerdo al nombre del concurso*/ MiembroJurado.obtenerMiembroJuradoXEmail(emailJurado),/*Colocar el  ,*/nota);
+        System.out.println("Ingrese el nombre del concurso que se desea evaluar: ");
+        sc.useDelimiter("\n");
+        String name_concurso= sc.next();
+        System.out.println("Ingrese el nombre de la mascota a evaluar: ");
+        sc.useDelimiter("\n");
+        String name_mascota= sc.next();
         
+        ArrayList<Inscripcion> inscripciones = Inscripcion.readFromFile("inscripciones.txt");
+        for( Inscripcion inscrip : inscripciones ){
+            if(Objects.equals(   ,  ))
+       /**/
+        Evaluacion new_eva = new Evaluacion(Util.nextID("evaluaciones.txt"),MiembroJurado.obtenerMiembroJuradoXEmail(emailJurado).getId(),/*Colocar idInscripcion*/ ,Concurso.obtenerConcursoXNombre(name_concurso).getIdConcurso() ,nota);
         return new_eva;
     }
     

@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 /**
  *
@@ -35,9 +36,6 @@ public class Inscripcion {
         this.costoInscripcion = costoInscripcion;
         this.idMascota= idMascota;
     }
-    
-    
-    
         @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -95,6 +93,24 @@ public class Inscripcion {
             System.out.println(e.getMessage());
         }
     }
+       public static ArrayList<Inscripcion> readFromFile(String nomfile){
+        ArrayList<Inscripcion> inscripciones = new ArrayList<>();
+        try(Scanner sc= new Scanner(new File(nomfile))){
+            while(sc.hasNextLine())
+            {
+                String linea=sc.nextLine();
+                String [] tokens= linea.split("|");
+                Inscripcion insc = new Inscripcion(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), LocalDate.parse(tokens[3]), Double.parseDouble(tokens[4]));
+                inscripciones.add(insc);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+  
+        }
+        return inscripciones;
+       }
+    
     
     public static Inscripcion nextInscripcion(Scanner sc){
         System.out.println("Ingrese el nombre de la mascota: ");
@@ -112,6 +128,6 @@ public class Inscripcion {
         Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),Mascota.obtenerMascotaXNombre(nombre_mascota).getIdMascota(),Concurso.obtenerConcursoXNombre(nombre_concurso).getIdConcurso(),fecha,costo);
         return new_inscrip;
     }
-        
     
+
 }
