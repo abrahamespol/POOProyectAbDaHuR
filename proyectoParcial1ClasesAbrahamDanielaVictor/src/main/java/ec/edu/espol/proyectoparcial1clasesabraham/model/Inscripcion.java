@@ -53,6 +53,46 @@ public class Inscripcion {
         return (this.idInscripcion == new_ins.idInscripcion);
     }
 
+    public int getIdMascota() {
+        return idMascota;
+    }
+
+    public void setIdMascota(int idMascota) {
+        this.idMascota = idMascota;
+    }
+
+    public Mascota getMascota() {
+        return mascota;
+    }
+
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
+    }
+
+    public int getIdConcurso() {
+        return idConcurso;
+    }
+
+    public void setIdConcurso(int idConcurso) {
+        this.idConcurso = idConcurso;
+    }
+
+    public Concurso getConcurso() {
+        return concurso;
+    }
+
+    public void setConcurso(Concurso concurso) {
+        this.concurso = concurso;
+    }
+
+    public ArrayList<Evaluacion> getEvaluaciones() {
+        return evaluaciones;
+    }
+
+    public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
+        this.evaluaciones = evaluaciones;
+    }
+    
     public int getIdInscripcion() {
         return idInscripcion;
     }
