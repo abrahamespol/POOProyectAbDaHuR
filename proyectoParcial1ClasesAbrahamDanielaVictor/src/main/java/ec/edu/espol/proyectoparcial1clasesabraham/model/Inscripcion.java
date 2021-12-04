@@ -37,9 +37,13 @@ public class Inscripcion {
         this.idConcurso = idConcurso;
         this.concurso = concurso;
         this.fechaInscripcion = fechaInscripcion;
-        this.costoInscripcion = costoInscripcion;
+        if(costoInscripcion>=0)
+            this.costoInscripcion = costoInscripcion;
+        else
+            this.costoInscripcion = -costoInscripcion;
         this.evaluaciones = new ArrayList<> ();
         this.descuento = descuento;
+        this.evaluaciones = new ArrayList<>();
     }
 
     public Inscripcion(int idInscripcion, int idMascota, int idConcurso, LocalDate fechaInscripcion, double costoInscripcion) {
@@ -47,13 +51,14 @@ public class Inscripcion {
         this.idMascota = idMascota;
         this.idConcurso = idConcurso;
         this.fechaInscripcion = fechaInscripcion;
-        this.costoInscripcion = costoInscripcion;
+        if(costoInscripcion>=0)
+            this.costoInscripcion = costoInscripcion;
+        else
+            this.costoInscripcion = -costoInscripcion;
+        this.evaluaciones = new ArrayList<>();
     }
-
     
-
-    
-        @Override
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -68,6 +73,10 @@ public class Inscripcion {
         return (this.idInscripcion == new_ins.idInscripcion);
     }
 
+    public void setIdInscripcion(int idInscripcion) {
+        this.idInscripcion = idInscripcion;
+    }
+  
     public int getIdMascota() {
         return idMascota;
     }
@@ -125,7 +134,8 @@ public class Inscripcion {
     }
 
     public void setCostoInscripcion(double costoInscripcion) {
-        this.costoInscripcion=costoInscripcion;
+        if(costoInscripcion>=0)
+            this.costoInscripcion=costoInscripcion;
     }
 
     public double getDescuento() {
@@ -133,14 +143,14 @@ public class Inscripcion {
     }
 
     public void setDescuento(double descuento) {
-        if(this.costoInscripcion>25.0)
+        if(this.costoInscripcion>25)
         this.descuento = this.costoInscripcion-this.costoInscripcion*0.1;
         else{
-            this.descuento=0.0;
+            this.descuento=0;
         }
     }
     
-    
+    //Falta el toString
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true )))
         {
@@ -170,13 +180,19 @@ public class Inscripcion {
     
     
     public static Inscripcion nextInscripcion(Scanner sc){
-        System.out.println("Ingrese el nombre de la mascota: ");
-         sc.useDelimiter("\n");
-        sc.useLocale(Locale.US);
-        String nombre_mascota = sc.next();
-        System.out.println("Ingrese el nombre del concurso: ");
         sc.useDelimiter("\n");
-        String nombre_concurso = sc.next();
+        sc.useLocale(Locale.US);
+        String nombre_mascota = null;
+        do{
+            System.out.println("Ingrese el nombre de la mascota: ");
+            nombre_mascota = sc.next();
+        }while(Mascota.obtenerMascotaXNombre(nombre_mascota) == null);
+        sc.useDelimiter("\n");
+        String nombre_concurso;
+        do{
+            System.out.println("Ingrese el nombre del concurso: ");
+            nombre_concurso = sc.next();
+        }while(Concurso.obtenerConcursoXNombre(nombre_concurso) == null);
         System.out.println("Ingrese la fecha de inscripcion en el formato: año-mes-dia");
         sc.useDelimiter(",");
         String fecha= sc.next();
@@ -184,8 +200,7 @@ public class Inscripcion {
         LocalDate fecha1 = LocalDate.of(Integer.parseInt(arr_fecha[0]), Integer.parseInt(arr_fecha[1]),Integer.parseInt(arr_fecha[2]));
         fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
         System.out.println("Ingrese el costo de inscripcion: ");
-        double costo = sc.nextDouble();
-        
+        double costo = sc.nextDouble();  
         Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),Mascota.obtenerMascotaXNombre(nombre_mascota).getIdMascota(),Concurso.obtenerConcursoXNombre(nombre_concurso).getIdConcurso(),fecha1,costo);
         return new_inscrip;
     }
@@ -193,7 +208,7 @@ public class Inscripcion {
     
     public static Inscripcion ObtenerObjetoInscripcion(int id){    
         ArrayList<Inscripcion> list_inscripciones=Inscripcion.readFromFile("inscripciones.txt");
-        for ( Inscripcion inscripcion:list_inscripciones){
+        for (Inscripcion inscripcion:list_inscripciones){
             if(inscripcion.getIdInscripcion() == id){
                 return inscripcion;   
             }

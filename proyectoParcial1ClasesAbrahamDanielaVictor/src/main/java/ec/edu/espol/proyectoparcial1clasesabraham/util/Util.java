@@ -71,7 +71,7 @@ public class Util {
                 case 2:
                     System.out.println("Por favor ingrese los datos de la Mascota\n");
                     Mascota mascota1 = Mascota.nextMascota(sc);
-                    Dueño dueno = null;
+                    Dueño dueno;
                     int idD = 0;
                     do{
                         dueno = Dueño.obtenerDueñoXEmail(sc);
@@ -99,7 +99,7 @@ public class Util {
                         awrdsCntst.add(p);
                     }
                     int idC = 0;
-                    Concurso conc = null;
+                    Concurso conc;
                     do{
                         conc = Concurso.obtenerConcursoXNombre(sc); 
                     }while(conc == null);
@@ -120,7 +120,7 @@ public class Util {
                         lst_crit.add(c);
                     }
                     int indC = 0;
-                    Concurso con = null;
+                    Concurso con;
                     do{
                         con =  Concurso.obtenerConcursoXNombre(sc); 
                     }while(con == null);

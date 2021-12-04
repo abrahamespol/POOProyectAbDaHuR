@@ -38,6 +38,7 @@ public class Mascota {
         this.raza = raza;
         this.fechaNacimiento = fechaNacimiento;
         this.tipo = tipo;
+        this.inscripciones = new ArrayList<>();
     }
 
     public Mascota(int idMascota, String nombre, String tipo, String raza, LocalDate fechaNacimiento, int idDueño, Dueño dueño, ArrayList<Inscripcion> inscripciones) {

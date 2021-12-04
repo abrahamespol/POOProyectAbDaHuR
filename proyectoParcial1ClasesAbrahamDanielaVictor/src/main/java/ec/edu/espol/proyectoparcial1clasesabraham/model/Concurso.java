@@ -43,6 +43,9 @@ public class Concurso {
         this.fechaInscripcion = fechaInscripcion;
         this.fechaCierreInscripcion = fechaCierreInscripcion;
         this.tematica = tematica;        
+        this.inscripcion = new ArrayList<>();
+        this.premios = new ArrayList<>();
+        this.criterio = new ArrayList<>();
     }
     
     

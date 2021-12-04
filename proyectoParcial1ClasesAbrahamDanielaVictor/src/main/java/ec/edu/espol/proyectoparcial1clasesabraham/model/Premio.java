@@ -114,9 +114,6 @@ public class Premio {
         return prms;
     }
     
-    
-    
-    
     public static Premio nextPremio(Scanner sc){
         int idp = Util.nextID("dueños.txt");
         int idC = 0; // este valor default se da a proposito, para luego hacer set en el por medio de la funcion menu
