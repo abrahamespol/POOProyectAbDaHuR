@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
@@ -33,7 +31,10 @@ public class Concurso {
     private ArrayList<Inscripcion> inscripcion;
     private ArrayList<Premio> premios;
     private ArrayList<Criterio> criterio;
-    
+    /*
+    LocalDate fecha1 = LocalDate.of(Integer.parseInt(arr_fecha[0]), Integer.parseInt(arr_fecha[1]),Integer.parseInt(arr_fecha[2]));
+        fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    */
     
     public Concurso(int idConcurso, String nombre, LocalDate fecha, LocalDate fechaInscripcion, LocalDate fechaCierreInscripcion, String tematica) {
         this.idConcurso = idConcurso;
@@ -153,7 +154,7 @@ public class Concurso {
         StringBuilder sb = new StringBuilder();
         sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + this.nombre+"\n Fecha: " + this.fecha +"/n Fecha de Inscripción: " + this.fechaInscripcion + "/n Fecha de cierre de Inscripción: " + this.fechaCierreInscripcion+ "/n Temática: " + this.tematica);
         for(Inscripcion ins : inscripcion)
-            sb.append("\n Mascota"+ins.getMascota()+"\n Descuento: "+ins.getDescuento()+"\n Valor a pagar:"+ins.getCostoInscripcion());
+            sb.append("\n La Mascota "+ins.getMascota().getNombre()+"\n obtiene un Descuento de : "+ins.getDescuento()+"\n dado el Valor a pagar:"+ins.getCostoInscripcion());
         
         for(Premio premio : premios)
             sb.append("\n El premio: "+ premio.getDescripcion() + " está destinado para el "+ premio.getPuesto() +"lugar. \n");
@@ -181,7 +182,10 @@ public class Concurso {
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");// revisar video
-                Concurso con = new Concurso(Integer.parseInt(tokens[0]),tokens[1],(tokens[2]),(tokens[3]),(tokens[4]),tokens[5]);
+                /*int idConcurso, String nombre, LocalDate fecha, LocalDate fechaInscripcion, LocalDate fechaCierreInscripcion, String tematica*/
+                Concurso con = new Concurso (Integer.parseInt(tokens[0]),tokens[1],LocalDate.parse(tokens[2]),LocalDate.parse(tokens[3]),
+                        LocalDate.parse(tokens[4]),tokens[5]);
+                
                 concurso.add(con);
             }
         }

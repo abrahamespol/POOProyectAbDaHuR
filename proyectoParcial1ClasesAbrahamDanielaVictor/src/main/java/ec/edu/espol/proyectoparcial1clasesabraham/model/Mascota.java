@@ -10,11 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-
-
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
@@ -40,7 +36,7 @@ public class Mascota {
         this.idDueño = idDueño;
         this.nombre = nombre;
         this.raza = raza;
-        this.fechaNacimiento = LocalDate.of(0, 0, 0);
+        this.fechaNacimiento = fechaNacimiento;
         this.tipo = tipo;
     }
 
@@ -48,7 +44,7 @@ public class Mascota {
         this.idMascota = idMascota;
         this.nombre = nombre;
         this.raza = raza;
-        this.fechaNacimiento = LocalDate.of(0, 0, 0);
+        this.fechaNacimiento = fechaNacimiento;
         this.tipo = tipo;
         this.idDueño = idDueño;
         this.dueño = dueño;
@@ -161,7 +157,8 @@ public class Mascota {
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");
-                Mascota mas = new Mascota(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2],tokens[3],tokens[4],(tokens[5]));
+                /*int idMascota,int idDueño, String nombre, String tipo, String raza, LocalDate fechaNacimiento*/
+                Mascota mas = new Mascota(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2],tokens[3],tokens[4],LocalDate.parse(tokens[5]));
                 mascota.add(mas);
             }
         }
@@ -183,10 +180,8 @@ public class Mascota {
         System.out.println("Ingrese la raza de su mascota: ");
         String raz = sc.nextLine();
         System.out.println("Ingrese la fecha de nacimiento de su mascota: ");
-        sc.useDelimiter(",");
-        sc.useLocale(Locale.US);
-        String fechaNac = sc.next();
-        LocalDate fn = LocalDate.parse(fechaNac); //Constructor y en los get y set le puse Local Time en vez de Date
+        //String fechaNac = sc.next();
+        LocalDate fn = LocalDate.parse(sc.next()); 
         Mascota mas1 = new Mascota(idm,idD, name1, tip, raz, fn);
         return mas1;
     }

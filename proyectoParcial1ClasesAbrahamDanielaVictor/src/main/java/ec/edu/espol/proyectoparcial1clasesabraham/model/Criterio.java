@@ -187,4 +187,24 @@ public class Criterio {
         Criterio cr1 = new Criterio(idcr,idc, namec, dp, pm);
         return cr1;
     }
+        public static Criterio obtenerCriterioXNombre(String nombre){
+        ArrayList<Criterio> criterios = Criterio.readFromFile("criterios.txt");
+        for(Criterio msc : criterios){
+            if(Objects.equals(msc.nombre, nombre))
+                 return msc;   
+        }
+        return null;
+    }  
+    
+    public static Criterio ObtenerObjetoCriterio(int id){    
+        ArrayList<Criterio> list_criterios=Criterio.readFromFile("criterios.txt");
+        for ( Criterio criterio:list_criterios){
+            if(criterio.getIdCriterio() == id){
+                return criterio;   
+            }
+        }return null;
+        
+    }
+
 }
+
