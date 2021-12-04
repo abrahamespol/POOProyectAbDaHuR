@@ -157,7 +157,8 @@ public class Mascota {
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");
-                Mascota mas = new Mascota(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2],tokens[3],tokens[4],(tokens[5]));
+                /*int idMascota,int idDueño, String nombre, String tipo, String raza, LocalDate fechaNacimiento*/
+                Mascota mas = new Mascota(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2],tokens[3],tokens[4],LocalDate.parse(tokens[5]));
                 mascota.add(mas);
             }
         }

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -29,13 +30,29 @@ public class Inscripcion {
     private double descuento;
     /*  idInscripcion, idConcurso, fecha, costo */
 
-    public Inscripcion(int idInscripcion,int idMascota, int idConcurso, LocalDate fechaInscripcion, double costoInscripcion) {
+    public Inscripcion(int idInscripcion, int idMascota, Mascota mascota, int idConcurso, Concurso concurso, LocalDate fechaInscripcion, double costoInscripcion, ArrayList<Evaluacion> evaluaciones, double descuento) {
+        this.idInscripcion = Util.nextID("inscripciones.txt");
+        this.idMascota = idMascota;
+        this.mascota = mascota;
+        this.idConcurso = idConcurso;
+        this.concurso = concurso;
+        this.fechaInscripcion = fechaInscripcion;
+        this.costoInscripcion = costoInscripcion;
+        this.evaluaciones = new ArrayList<> ();
+        this.descuento = descuento;
+    }
+
+    public Inscripcion(int idInscripcion, int idMascota, int idConcurso, LocalDate fechaInscripcion, double costoInscripcion) {
         this.idInscripcion = idInscripcion;
+        this.idMascota = idMascota;
         this.idConcurso = idConcurso;
         this.fechaInscripcion = fechaInscripcion;
         this.costoInscripcion = costoInscripcion;
-        this.idMascota= idMascota;
     }
+
+    
+
+    
         @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -99,7 +116,7 @@ public class Inscripcion {
             while(sc.hasNextLine())
             {
                 String linea=sc.nextLine();
-                String [] tokens= linea.split("|");
+                String [] tokens= linea.split("\\|");
                 Inscripcion insc = new Inscripcion(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), LocalDate.parse(tokens[3]), Double.parseDouble(tokens[4]));
                 inscripciones.add(insc);
             }
@@ -114,7 +131,7 @@ public class Inscripcion {
     
     public static Inscripcion nextInscripcion(Scanner sc){
         System.out.println("Ingrese el nombre de la mascota: ");
-        sc.useDelimiter("\n");
+         sc.useDelimiter("\n");
         sc.useLocale(Locale.US);
         String nombre_mascota = sc.next();
         System.out.println("Ingrese el nombre del concurso: ");
@@ -122,11 +139,27 @@ public class Inscripcion {
         String nombre_concurso = sc.next();
         System.out.println("Ingrese la fecha de inscripcion en el formato: año-mes-dia");
         sc.useDelimiter(",");
-        LocalDate fecha = LocalDate.parse(sc.next());
+        String fecha= sc.next();
+        String [] arr_fecha= fecha.split("-");
+        LocalDate fecha1 = LocalDate.of(Integer.parseInt(arr_fecha[0]), Integer.parseInt(arr_fecha[1]),Integer.parseInt(arr_fecha[2]));
+        fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
         System.out.println("Ingrese el costo de inscripcion: ");
         double costo = sc.nextDouble();
-        Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),Mascota.obtenerMascotaXNombre(nombre_mascota).getIdMascota(),Concurso.obtenerConcursoXNombre(nombre_concurso).getIdConcurso(),fecha,costo);
+        
+        Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),Mascota.obtenerMascotaXNombre(nombre_mascota).getIdMascota(),Concurso.obtenerConcursoXNombre(nombre_concurso).getIdConcurso(),fecha1,costo);
         return new_inscrip;
     }
+    
+    
+    public static Inscripcion ObtenerObjetoInscripcion(int id){    
+        ArrayList<Inscripcion> list_inscripciones=Inscripcion.readFromFile("inscripciones.txt");
+        for ( Inscripcion inscripcion:list_inscripciones){
+            if(inscripcion.getIdInscripcion() == id){
+                return inscripcion;   
+            }
+        }return null;
+        
+    }
+   
     
 }

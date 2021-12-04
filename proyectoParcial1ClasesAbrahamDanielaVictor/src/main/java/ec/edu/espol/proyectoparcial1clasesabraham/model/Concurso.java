@@ -11,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
@@ -32,7 +31,10 @@ public class Concurso {
     private ArrayList<Inscripcion> inscripcion;
     private ArrayList<Premio> premios;
     private ArrayList<Criterio> criterio;
-    
+    /*
+    LocalDate fecha1 = LocalDate.of(Integer.parseInt(arr_fecha[0]), Integer.parseInt(arr_fecha[1]),Integer.parseInt(arr_fecha[2]));
+        fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    */
     
     public Concurso(int idConcurso, String nombre, LocalDate fecha, LocalDate fechaInscripcion, LocalDate fechaCierreInscripcion, String tematica) {
         this.idConcurso = idConcurso;
@@ -180,7 +182,10 @@ public class Concurso {
             while(sc.hasNextLine()){
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");// revisar video
-                Concurso con = new Concurso(Integer.parseInt(tokens[0]),tokens[1],(tokens[2]),(tokens[3]),(tokens[4]),tokens[5]);
+                /*int idConcurso, String nombre, LocalDate fecha, LocalDate fechaInscripcion, LocalDate fechaCierreInscripcion, String tematica*/
+                Concurso con = new Concurso (Integer.parseInt(tokens[0]),tokens[1],LocalDate.parse(tokens[2]),LocalDate.parse(tokens[3]),
+                        LocalDate.parse(tokens[4]),tokens[5]);
+                
                 concurso.add(con);
             }
         }
