@@ -137,8 +137,8 @@ public class Criterio {
         
         StringBuilder sb = new StringBuilder();
         sb.append("Criterio No. " + this.idCriterio +"\n Nombre del criterio: "+ this.nombre+ "\n Descripcion: " + this.descripcion+ "\n Puntaje máximo: "+this.puntajeMax);
-        sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + concursos.getNombre()+"\n Fecha: " + concursos.getFecha() +"/n Fecha de Inscripción: " + concursos.getFechaInscripcion() + "/n Fecha de cierre de Inscripción: " + concursos.getFechaCierreInscripcion()+ "/n Temática: " + concursos.getTematica());
-        for(Evaluacion evaluacion : evaluaciones)
+        sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + this.concursos.getNombre()+"\n Fecha: " + this.concursos.getFecha() +"/n Fecha de Inscripción: " + this.concursos.getFechaInscripcion() + "/n Fecha de cierre de Inscripción: " + this.concursos.getFechaCierreInscripcion()+ "/n Temática: " + this.concursos.getTematica());
+        for(Evaluacion evaluacion : this.evaluaciones)
             //sb.append("Evaluaciones No. "+this.idEvaluacion+"\n Calificacion: "+evaluacion.getNota());
             sb.append("Calificacion de evaluacion: "+evaluacion.getCalificacion());
         return sb.toString();
@@ -146,7 +146,7 @@ public class Criterio {
     
     
     public void saveFile(String nomFile){ 
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile)))){
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile),true))){
             pw.println(Util.nextID(nomFile)+"|"+this.idConcurso+"|"+this.nombre+"|"+this.descripcion+"|"+this.puntajeMax);
             
         }

@@ -104,6 +104,34 @@ public class Evaluacion {
     public Criterio getCriterio() {
         return criterio;
     }
+
+    public void setIdEvalucion(int idEvalucion) {
+        this.idEvalucion = idEvalucion;
+    }
+
+    public void setIdMiembroJurado(int idMiembroJurado) {
+        this.idMiembroJurado = idMiembroJurado;
+    }
+
+    public void setIdInscripcion(int idInscripcion) {
+        this.idInscripcion = idInscripcion;
+    }
+
+    public void setMiembroJurado(MiembroJurado miembroJurado) {
+        this.miembroJurado = miembroJurado;
+    }
+
+    public void setInscripcion(Inscripcion inscripcion) {
+        this.inscripcion = inscripcion;
+    }
+
+    public void setIdCriterio(int idCriterio) {
+        this.idCriterio = idCriterio;
+    }
+
+    public void setCriterio(Criterio criterio) {
+        this.criterio = criterio;
+    }
     
 
     @Override

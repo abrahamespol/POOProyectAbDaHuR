@@ -151,6 +151,18 @@ public class Inscripcion {
     }
     
     //Falta el toString
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("La Inscripcion no. "+this.idInscripcion+", fue hecha para la participacion de la mascota "+this.mascota.getNombre()
+                +" en el concurso "+this.concurso.getNombre()+" realizado en  "+this.fechaInscripcion+". \n Esta tiene un costo de "+this.costoInscripcion
+                +" y tuvo las siguientes evaluaciones: ");
+        for(Evaluacion ev : this.evaluaciones){
+            sb.append("Hecha por "+ev.getMiembroJurado().getNombre()+ " sobre el criterio "+ev.getCriterio().getNombre()+ "con calificacion de "+ev.getCalificacion()+"\n.");
+        }
+        return sb.toString();
+    }
+            
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true )))
         {

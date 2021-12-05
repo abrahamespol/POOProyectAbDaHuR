@@ -73,6 +73,19 @@ public class Util {
                     Mascota mascota1 = Mascota.nextMascota(sc);
                     Dueño dueno;
                     int idD = 0;
+                    dueno = Dueño.obtenerDueñoXEmail(sc);  
+//                    if(dueno == null){ // aqui es cuando no existe ese dueño en el archivo o si no hay archivo dueño como tal
+//                        System.out.println("Su dueño ingresado NO EXISTE");
+//                        System.out.println("Por favor ingrese los datos del Dueño de preferencia para la mascota ingresada: \n");
+//                        dueno = Dueño.nextDueno(sc);
+//                        dueno.saveFile("dueños.txt");
+//                        System.out.println("\n");
+////                    }
+//                    idD = dueno.getId();
+//                    mascota1.setIdDueño(idD);
+//                    mascota1.saveFile("mascotas.txt");
+//                    break;
+                    
                     do{
                         dueno = Dueño.obtenerDueñoXEmail(sc);
                     }while(dueno == null);

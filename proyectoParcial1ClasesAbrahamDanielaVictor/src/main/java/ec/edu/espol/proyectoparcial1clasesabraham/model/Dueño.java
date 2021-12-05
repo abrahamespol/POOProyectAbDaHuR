@@ -49,7 +49,7 @@ public class Dueño extends Persona{
         StringBuilder sb = new StringBuilder();
         sb.append(/*"Id de Dueño: "+this.nombre+*/" Dueño nombre: "+this.nombre+", Apellidos: "
                 +this.apellidos+", Direccion: "+this.direccion+" tiene: \n");
-        for(Mascota mascota : mascotas){
+        for(Mascota mascota : this.mascotas){
             sb.append("El/La"+mascota.getTipo()+", de Nombre "+mascota.getNombre()+" y raza "+mascota.getRaza()+".\n");
         }        
         return sb.toString();

@@ -52,7 +52,7 @@ public class MiembroJurado extends Persona{
         StringBuilder sb = new StringBuilder();
         sb.append("Miembro de jurado: "+this.nombre+' '+this.apellidos+" cuyo id y perfil profesional son "
                 +this.id+' '+this.descripcionPerfilProfesional+" tiene las siguientes evaluaciones: ");
-        for(Evaluacion ev : evaluaciones){
+        for(Evaluacion ev : this.evaluaciones){
             sb.append(ev+". \n");
         }
         return sb.toString();

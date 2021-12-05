@@ -156,13 +156,13 @@ public class Concurso {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Concurso No. " + this.idConcurso + "\n Nombre del concurso: " + this.nombre+"\n Fecha: " + this.fecha +"/n Fecha de Inscripción: " + this.fechaInscripcion + "/n Fecha de cierre de Inscripción: " + this.fechaCierreInscripcion+ "/n Temática: " + this.tematica);
-        for(Inscripcion ins : inscripcion)
+        for(Inscripcion ins : this.inscripcion)
             sb.append("\n La Mascota "+ins.getMascota().getNombre()+"\n obtiene un Descuento de : "+ins.getDescuento()+"\n dado el Valor a pagar:"+ins.getCostoInscripcion());
         
-        for(Premio premio : premios)
+        for(Premio premio : this.premios)
             sb.append("\n El premio: "+ premio.getDescripcion() + " está destinado para el "+ premio.getPuesto() +"lugar. \n");
         
-        for(Criterio crit: criterio)
+        for(Criterio crit: this.criterio)
             sb.append("Criterio No.: " + crit.getIdCriterio() + "/n Descripción: " + crit.getDescripcion() + "\n Puntaje máximo: "+ crit.getPuntajeMax());
         
         return sb.toString();
@@ -170,7 +170,7 @@ public class Concurso {
     //métodos
     
      public void saveFile(String nomFile){ 
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile)))){
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile),true))){
             pw.println(Util.nextID(nomFile)+ "|" + this.nombre+"|" + this.fecha +"|" + this.fechaInscripcion + "|" + this.fechaCierreInscripcion+ "|" + this.tematica);
             
         }

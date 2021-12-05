@@ -136,14 +136,14 @@ public class Mascota {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Macota No. " + this.idMascota + "\n Nombre de la mascota: " + this.nombre+"\n Tipo de animal: " + this.tipo +"/n Raza de la mascota: " + this.raza + "/n Fecha de nacimiento: " + this.fechaNacimiento+ "Pertenece a /n"+ "Id de Dueño: "+dueño.getId()+"/n Nombre: "+dueño.getNombre()+", Apellidos: "+ dueño.getApellidos());
-        for(Inscripcion inscripcion : inscripciones)
-            sb.append("\n Costo de la inscripcion: "+inscripcion.getCostoInscripcion()+"/n Fecha de inscripción: "+inscripcion.getFechaInscripcion());
+        sb.append("Macota No. " + this.idMascota + "\n Nombre de la mascota: " + this.nombre+"\n Tipo de animal: " + this.tipo +"/n Raza de la mascota: " + this.raza + "/n Fecha de nacimiento: " + this.fechaNacimiento+ "Pertenece a /n"+ "Id de Dueño: "+this.dueño.getId()+"/n Nombre: "+this.dueño.getNombre()+", Apellidos: "+ this.dueño.getApellidos());
+        for(Inscripcion inscripcion : this.inscripciones)
+            sb.append("\n Costo de la inscripcion: "+inscripcion.getCostoInscripcion()+"/n Fecha de inscripción: "+inscripcion.getFechaInscripcion()+".\n");
         return sb.toString();
     }
     
     public void saveFile(String nomFile){ 
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile)))){
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))){
             pw.println(Util.nextID(nomFile)+"|"+this.idDueño+"|"+this.nombre+"|"+this.tipo+"|"+this.raza+"|"+this.fechaNacimiento);
             
         }
