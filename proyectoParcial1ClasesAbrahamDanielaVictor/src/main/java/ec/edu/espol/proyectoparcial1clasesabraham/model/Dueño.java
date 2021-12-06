@@ -96,18 +96,18 @@ public class Dueño extends Persona{
     //Por lo que al usar esta funcion, se meten un Scanner (para que el usuario llene los valores), y el nombre del archivo
     //A pesar de que no se guarden objetos en ese lugar
     public static Dueño nextDueno(Scanner sc){
+        sc.useDelimiter("\n");
         int idd = Util.nextID("dueños.txt");
         System.out.println("Ingrese el nombre del Dueño de la/s mascota/s: ");
-        String nom0 = sc.next();
-        String nom = sc.nextLine();
+        String nom = sc.next/*Line*/();
         System.out.println("Ingrese los apellidos del Dueño de la/s mascota/s: ");
-        String apell = sc.nextLine();
+        String apell = sc.next/*Line*/();
         System.out.println("Ingrese el numero de telefono del Dueño de la/s mascota/s: ");
-        String phoNum = sc.nextLine();
+        String phoNum = sc.next/*Line*/();
         System.out.println("Ingrese el email del Dueño de la/s mascota/s: ");
-        String email = sc.nextLine();
+        String email = sc.next/*Line*/();
         System.out.println("Ingrese la direccion del Dueño de la/s mascota/s: ");
-        String direction = sc.nextLine();
+        String direction = sc.next/*Line*/();
         Dueño neoDu = new Dueño(idd, nom, apell, phoNum, email, direction);
         return neoDu;
     }

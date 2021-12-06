@@ -167,31 +167,13 @@ public class Evaluacion {
         }
         return evaluaciones;
     }    
-    public static Evaluacion nextEvaluacion(Scanner sc){
-        sc.useDelimiter(".");
-        String correo;
-        do{
-            System.out.println("Ingrese el email del jurado: ");
-            correo = sc.next();
-        }while(MiembroJurado.obtenerMiembroJuradoXEmail(correo) == null);
-        int idMiembroJurado = MiembroJurado.obtenerMiembroJuradoXEmail(correo).getId();
-        System.out.println("Ingrese el id de la inscripcion: ");
-        int idInscripcion = sc.nextInt();
-        do{
-            System.out.println("Ingrese el id de la inscripcion: ");
-            idInscripcion = sc.nextInt();
-        }while(Inscripcion.ObtenerObjetoInscripcion(idInscripcion) == null);
-        System.out.println("Ingrese el id del criterio: ");
-        int idCriterio = sc.nextInt();
-        do{
-            System.out.println("Ingrese el id del criterio: ");
-            idCriterio = sc.nextInt();
-        }while(Criterio.ObtenerObjetoCriterio(idCriterio) == null);
-        
+    public static Evaluacion nextEvaluacion(Scanner sc){        
+        int idmj = 0;
+        int idInsc = 0;
+        int idCrit = 0;
         System.out.println("Ingrese la nota de evaluacion: ");
-        double calificacion = sc.nextDouble();
-        Evaluacion eva1= new Evaluacion(Util.nextID("evaluaciones.txt"), idMiembroJurado, idInscripcion,calificacion,idCriterio);
+        double cal = sc.nextDouble();
+        Evaluacion eva1= new Evaluacion(Util.nextID("evaluaciones.txt"),idmj, idInsc,cal,idCrit);
         return eva1;
-                
     }            
 }

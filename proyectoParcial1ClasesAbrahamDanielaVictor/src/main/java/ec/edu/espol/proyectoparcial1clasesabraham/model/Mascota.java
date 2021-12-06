@@ -171,17 +171,16 @@ public class Mascota {
     }
     
     public static Mascota nextMascota(Scanner sc){
+        sc.useDelimiter("\n");
         int idm = Util.nextID("mascotas.txt");
         int idD = 0;
         System.out.println("Ingrese el nombre de la mascota: ");
-        String name = sc.next();
-        String name1 = sc.nextLine();
+        String name1 = sc.next();
         System.out.println("Ingrese el tipo de mascota: ");
-        String tip = sc.nextLine();
+        String tip = sc.next();
         System.out.println("Ingrese la raza de su mascota: ");
-        String raz = sc.nextLine();
+        String raz = sc.next();
         System.out.println("Ingrese la fecha de nacimiento de su mascota: ");
-        //String fechaNac = sc.next();
         LocalDate fn = LocalDate.parse(sc.next()); 
         Mascota mas1 = new Mascota(idm,idD, name1, tip, raz, fn);
         return mas1;

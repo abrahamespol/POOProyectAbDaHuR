@@ -200,27 +200,27 @@ public class Concurso {
     }
     
     public static Concurso nextConcurso(Scanner sc){
+        sc.useDelimiter("\n");
         int idc = Util.nextID("concursos.txt");
         System.out.println("Ingrese el nombre del concurso: ");
-        String name = sc.next();//no sé porque pusiste el next y después el nextLine porque podía solo poner el next line y ya, pero lo pongo por si acaso
-        String name1 = sc.nextLine();
+        String name1 = sc.next();
         System.out.println("Ingrese la fecha del concurso: ");
         sc.useDelimiter(",");
         sc.useLocale(Locale.US);
         String fechaText = sc.next();
         LocalDate f = LocalDate.parse(fechaText);
-        System.out.println("Ingrese la fecha de incripción del concurso en este orden año,mes,día: ");
+        System.out.println("Ingrese la fecha de incripción del concurso en este orden: año-mes-día: ");
         sc.useDelimiter(",");
         sc.useLocale(Locale.US);
         String fechaTextoIns = sc.next();
         LocalDate fi = LocalDate.parse(fechaTextoIns);
-        System.out.println("Ingrese la fecha de cierre de incripción del consurso: ");
+        System.out.println("Ingrese la fecha de cierre de incripción del concurso: ");
         sc.useDelimiter(",");
         sc.useLocale(Locale.US);
         String fechaTextCierre = sc.next();
         LocalDate fc = LocalDate.parse(fechaTextCierre);
         System.out.println("Ingrese la temática del concurso: ");
-        String tm = sc.nextLine();
+        String tm = sc.next();
         Concurso con = new Concurso(idc, name1,f, fi, fc,tm);
         return con;
     }

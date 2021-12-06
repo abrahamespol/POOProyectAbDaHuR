@@ -8,6 +8,7 @@ package ec.edu.espol.proyectoparcial1clasesabraham.util;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Concurso;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Criterio;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Dueño;
+import ec.edu.espol.proyectoparcial1clasesabraham.model.Evaluacion;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Inscripcion;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Mascota;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.MiembroJurado;
@@ -55,6 +56,14 @@ public class Util {
         int infNGTV = (int)Double.NEGATIVE_INFINITY;
         int infPSTV = (int)Double.POSITIVE_INFINITY;
         int opcion;
+        File mjArc = new File("miembroJurados.txt");
+        File insArc = new File("inscripciones.txt");
+        File critArc = new File("criterios.txt");
+        File evArc = new File("evaluaciones.txt");
+        File dueArc = new File("dueños.txt");
+        File preArc = new File("premios.txt");
+        File mascArc = new File("mascotas.txt");
+        File concArc = new File("concursos.txt");
         do{
             do{
                 System.out.println("Escriba un numero de opcion\n");
@@ -74,25 +83,19 @@ public class Util {
                     Dueño dueno;
                     int idD = 0;
                     dueno = Dueño.obtenerDueñoXEmail(sc);  
-//                    if(dueno == null){ // aqui es cuando no existe ese dueño en el archivo o si no hay archivo dueño como tal
-//                        System.out.println("Su dueño ingresado NO EXISTE");
-//                        System.out.println("Por favor ingrese los datos del Dueño de preferencia para la mascota ingresada: \n");
-//                        dueno = Dueño.nextDueno(sc);
-//                        dueno.saveFile("dueños.txt");
-//                        System.out.println("\n");
-////                    }
-//                    idD = dueno.getId();
-//                    mascota1.setIdDueño(idD);
-//                    mascota1.saveFile("mascotas.txt");
-//                    break;
-                    
-                    do{
-                        dueno = Dueño.obtenerDueñoXEmail(sc);
-                    }while(dueno == null);
+                    if(dueno == null){ // aqui es cuando no existe ese dueño en el archivo o si no hay archivo dueño como tal
+                        System.out.println("El dueño de su email ingresado no existe");
+                        System.out.println("Por favor ingrese los datos del Dueño de preferencia para la mascota ingresada: \n");
+                        dueno = Dueño.nextDueno(sc);
+                        dueno.saveFile("dueños.txt");
+                        System.out.println("\n");
+                    }
                     idD = dueno.getId();
                     mascota1.setIdDueño(idD);
                     mascota1.saveFile("mascotas.txt");
                     break;
+                    
+                    
                 
                 case 3:
                     
@@ -113,9 +116,13 @@ public class Util {
                     }
                     int idC = 0;
                     Concurso conc;
-                    do{
-                        conc = Concurso.obtenerConcursoXNombre(sc); 
-                    }while(conc == null);
+                    conc = Concurso.obtenerConcursoXNombre(sc); 
+                    if(conc == null){
+                        System.out.println("El concurso cuyo nombre ingreso no existe");
+                        System.out.println("Ingrese los datos del Concurso cuyos premios ingreso");
+                        conc = Concurso.nextConcurso(sc);
+                        conc.saveFile("concursos.txt");                        
+                    }
                     idC = conc.getIdConcurso();
                     for(Premio p: awrdsCntst){
                         p.setIdConcurso(idC);
@@ -124,7 +131,6 @@ public class Util {
                     break;
 
                 case 5:
-                    
                     System.out.println("Escriba la cantidad de criterios a ingresar: \n");
                     int cant = sc.nextInt();
                     ArrayList<Criterio> lst_crit = new ArrayList<>();
@@ -133,10 +139,13 @@ public class Util {
                         lst_crit.add(c);
                     }
                     int indC = 0;
-                    Concurso con;
-                    do{
-                        con =  Concurso.obtenerConcursoXNombre(sc); 
-                    }while(con == null);
+                    Concurso con =  Concurso.obtenerConcursoXNombre(sc); 
+                    if(con == null){
+                        System.out.println("El concurso cuyo nombre ingreso no existe");
+                        System.out.println("Ingrese los datos del Concurso cuyos criterios ingreso");
+                        con = Concurso.nextConcurso(sc);
+                        con.saveFile("concursos.txt");                        
+                    }
                     indC = con.getIdConcurso();                    
                     for(Criterio crit: lst_crit){
                         crit.setIdConcurso(indC);
@@ -145,28 +154,11 @@ public class Util {
                     break;
                     
                 case 6:
-                    sc.useDelimiter("\n");
-                    Inscripcion inscp = Inscripcion.nextInscripcion(sc);  
-                    inscp.saveFile("inscripciones.txt");                  
-//                    int indMc = 0;
-//                    Mascota msc = null;
-//                    do{
-//                        msc =  Mascota.obtenerMascotaXNombre(sc); 
-//                    }while(msc == null);
-//                    indMc = msc.getIdMascota();
-//                    int idCo = 0;
-//                    Concurso conco = null;
-//                    do{
-//                        conco =  Concurso.obtenerConcursoXNombre(sc); 
-//                    }while(conco == null);
-//                    idCo = conco.getIdConcurso();
-//                    System.out.println("Ingrese el costo de la Inscripcion: ");
-//                    double costoI = sc.nextDouble();
-//                    System.out.println("Ingrese Fecha de Inscripcion: ");
-//                    Implementacion de ingreso de fecha, AGREGAR
-//                    Guardar Inscripcion en su archivo "inscripciones.txt" usando los datos indMc e idCo (idMascota e idConcurso segun el nombre ingresado de c/u)
+                    System.out.println("Ingrese los datos de su Inscripcion \n");
+                    Inscripcion insF = Inscripcion.nextInscripcion(sc);
+                    insF.saveFile("inscripciones.txt");
                     break;
-                
+               
                 case 7:
                     System.out.println("Por favor ingrese los datos del Miembro del Jurado\n");
                     MiembroJurado mbjr = MiembroJurado.nextMiembroJurado(sc);
@@ -175,8 +167,63 @@ public class Util {
                     break;
                 
                 case 8:
+                    System.out.println("Por favor ingrese los datos de Evaluación\n");
+                    sc.useDelimiter("\n");
+                    MiembroJurado mj;
+                    String correo;                    
+                    System.out.println("Ingrese el email del jurado: ");
+                    correo = sc.next();
+                    mj = MiembroJurado.obtenerMiembroJuradoXEmail(correo);
+                    if(mj == null){
+                        System.out.println("Su miembro del jurado cuyo email ingreso NO EXISTE");
+                        System.out.println("Por favor ingrese los datos del Miembro del Jurado que calificara en la Evaluacion: \n");
+                        mj = MiembroJurado.nextMiembroJurado(sc);
+                        mj.saveFile("miembroJurados.txt");
+                        System.out.println("\n");
+                    }
+                    int idMiembroJurado = mj.getId();
                     
+                    Inscripcion inscr;
+                    System.out.println("Ingrese el id de la inscripcion: ");
+                    int idInscripcion = sc.nextInt();
+                    inscr = Inscripcion.ObtenerObjetoInscripcion(idInscripcion);
+                    if(inscr == null){
+                        System.out.println("La inscripcion cuyo id ingreso NO EXISTE");
+                        sc.useDelimiter("\n");
+                        System.out.println("Ingrese los datos de su Inscripcion \n");
+                        inscr = Inscripcion.nextInscripcion(sc);
+                        inscr.saveFile("inscripciones.txt");
+                    }
+                    idInscripcion = inscr.getIdInscripcion();
+                    
+                    System.out.println("Ingrese el id del criterio: ");
+                    int idCriterio = sc.nextInt();
+                    Criterio crt = Criterio.ObtenerObjetoCriterio(idCriterio);
+                    if(crt == null){
+                        System.out.println("El Criterio cuyo id ingreso, NO EXISTE");
+                        System.out.println("Ingrese los datos de Criterio: ");
+                        crt = Criterio.nextCriterio(sc);
+                        int idco = 0;
+                        Concurso cons =  Concurso.obtenerConcursoXNombre(sc); 
+                        if(cons == null){
+                            System.out.println("El concurso cuyo nombre ingreso no existe");
+                            System.out.println("Ingrese los datos del Concurso cuyos criterios ingreso");
+                            cons = Concurso.nextConcurso(sc);
+                            cons.saveFile("concursos.txt");                        
+                        }
+                        idco = cons.getIdConcurso();                        
+                        crt.setIdConcurso(idco);
+                        crt.saveFile("criterios.txt");
+                    }
+                    idCriterio = crt.getIdCriterio();
+                    
+                    Evaluacion eva = Evaluacion.nextEvaluacion(sc);
+                    eva.setIdMiembroJurado(idMiembroJurado);
+                    eva.setIdCriterio(idCriterio);
+                    eva.setIdInscripcion(idInscripcion);
+                    eva.saveFile("evaluaciones.txt");
                     break;
+
             }
         }while(opcion > infNGTV && opcion < infPSTV);
     }

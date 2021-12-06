@@ -5,7 +5,9 @@
  */
 package ec.edu.espol.proyectoparcial1clasesabraham;
 
+import ec.edu.espol.proyectoparcial1clasesabraham.model.Concurso;
 import ec.edu.espol.proyectoparcial1clasesabraham.model.Dueño;
+import ec.edu.espol.proyectoparcial1clasesabraham.model.Premio;
 import ec.edu.espol.proyectoparcial1clasesabraham.util.Util;
 import java.util.Scanner;
 

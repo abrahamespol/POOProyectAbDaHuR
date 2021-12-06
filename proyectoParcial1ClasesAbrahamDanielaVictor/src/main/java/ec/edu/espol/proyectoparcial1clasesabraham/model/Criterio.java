@@ -173,13 +173,13 @@ public class Criterio {
     }
     
     public static Criterio nextCriterio(Scanner sc){
+        sc.useDelimiter("\n");
         int idcr = Util.nextID("criterios.txt");
         int idc = 0;
         System.out.println("Ingrese el nombre del criterio: ");
-        String name = sc.next();
-        String namec = sc.nextLine();
+        String namec = sc.next();
         System.out.println("Ingrese la descripción del criterio: ");
-        String dp = sc.nextLine();
+        String dp = sc.next();
         System.out.println("Ingrese el puntaje máximo: ");
         Double pm = sc.nextDouble();
         Criterio cr1 = new Criterio(idcr,idc, namec, dp, pm);

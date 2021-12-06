@@ -97,18 +97,18 @@ public class MiembroJurado extends Persona{
     //Por lo que al usar esta funcion, se meten un Scanner (para que el usuario llene los valores), y el nombre del archivo
     //A pesar de que no se guarden objetos en ese lugar (Recuerda hacerle esas preguntas al profesor)
     public static MiembroJurado nextMiembroJurado(Scanner sc){
+        sc.useDelimiter("\n");
         int idm = Util.nextID("miembroJurados.txt");
         System.out.println("Ingrese el nombre del Miembro del Jurado: ");
-        String nb0 = sc.nextLine();
-        String nb = sc.nextLine();        
+        String nb = sc.next();        
         System.out.println("Ingrese los apellidos del Miembro del Jurado");
-        String ap = sc.nextLine();
+        String ap = sc.next();
         System.out.println("Ingrese el numero de telefono del Miembro de Jurado: ");
-        String tlf = sc.nextLine();
+        String tlf = sc.next();
         System.out.println("Ingrese el email del Miembro del Jurado: ");
-        String mail = sc.nextLine();
+        String mail = sc.next();
         System.out.println("Ingrese la descripcion profesional de su Miembro de Jurado: ");
-        String descrp = sc.nextLine();
+        String descrp = sc.next();
         MiembroJurado mj = new MiembroJurado(idm, nb, ap, tlf, mail, descrp);
         return mj;
     }    
