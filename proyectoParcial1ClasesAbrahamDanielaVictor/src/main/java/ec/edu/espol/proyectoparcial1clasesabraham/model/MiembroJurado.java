@@ -100,18 +100,20 @@ public class MiembroJurado extends Persona{
         sc.useDelimiter("\n");
         int idm = Util.nextID("miembroJurados.txt");
         System.out.println("Ingrese el nombre del Miembro del Jurado: ");
-        String nb = sc.next();        
+        String nb0 = sc.next();
+        String nombre = nb0.toUpperCase().charAt(0) + nb0.substring(1, nb0.length()).toLowerCase();      
         System.out.println("Ingrese los apellidos del Miembro del Jurado");
         String ap = sc.next();
+        String apellido = ap.toUpperCase().charAt(0) + ap.substring(1, ap.length()).toLowerCase();
         System.out.println("Ingrese el numero de telefono del Miembro de Jurado: ");
         String tlf = sc.next();
         System.out.println("Ingrese el email del Miembro del Jurado: ");
-        String mail = sc.next();
+        String mail = sc.next().toLowerCase();
         System.out.println("Ingrese la descripcion profesional de su Miembro de Jurado: ");
-        String descrp = sc.next();
-        MiembroJurado mj = new MiembroJurado(idm, nb, ap, tlf, mail, descrp);
+        String descrp = sc.next().toLowerCase();
+        MiembroJurado mj = new MiembroJurado(idm, nombre, apellido, tlf, mail, descrp);
         return mj;
-    }    
+    }
         public static MiembroJurado obtenerMiembroJuradoXEmail(String email1){
         ArrayList<MiembroJurado> jueces = MiembroJurado.readFromFile("miembroJurados.txt");
         for(MiembroJurado miembro: jueces){

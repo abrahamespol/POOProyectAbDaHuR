@@ -177,12 +177,13 @@ public class Criterio {
         int idcr = Util.nextID("criterios.txt");
         int idc = 0;
         System.out.println("Ingrese el nombre del criterio: ");
-        String namec = sc.next();
+        String name = sc.next();
+        String nombre = name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
         System.out.println("Ingrese la descripción del criterio: ");
-        String dp = sc.next();
-        System.out.println("Ingrese el puntaje máximo: ");
+        String dp = sc.next().toLowerCase();
+        System.out.println("Ingrese el puntaje máximo, en números: ");
         Double pm = sc.nextDouble();
-        Criterio cr1 = new Criterio(idcr,idc, namec, dp, pm);
+        Criterio cr1 = new Criterio(idcr,idc, nombre, dp, pm);
         return cr1;
     }
         public static Criterio obtenerCriterioXNombre(String nombre){

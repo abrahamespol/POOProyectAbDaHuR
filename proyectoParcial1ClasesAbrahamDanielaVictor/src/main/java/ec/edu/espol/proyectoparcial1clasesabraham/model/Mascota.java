@@ -175,14 +175,15 @@ public class Mascota {
         int idm = Util.nextID("mascotas.txt");
         int idD = 0;
         System.out.println("Ingrese el nombre de la mascota: ");
-        String name1 = sc.next();
+        String name = sc.next().toLowerCase();
+        String nombre = name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
         System.out.println("Ingrese el tipo de mascota: ");
-        String tip = sc.next();
+        String tip = sc.next().toLowerCase();
         System.out.println("Ingrese la raza de su mascota: ");
-        String raz = sc.next();
-        System.out.println("Ingrese la fecha de nacimiento de su mascota: ");
+        String raz = sc.next().toLowerCase();
+        System.out.println("Ingrese la fecha de nacimiento de su mascota en este orden año-mes-día: ");
         LocalDate fn = LocalDate.parse(sc.next()); 
-        Mascota mas1 = new Mascota(idm,idD, name1, tip, raz, fn);
+        Mascota mas1 = new Mascota(idm,idD, name, tip, raz, fn);
         return mas1;
     }
     

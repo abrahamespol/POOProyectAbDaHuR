@@ -99,16 +99,18 @@ public class Dueño extends Persona{
         sc.useDelimiter("\n");
         int idd = Util.nextID("dueños.txt");
         System.out.println("Ingrese el nombre del Dueño de la/s mascota/s: ");
-        String nom = sc.next/*Line*/();
+        String nom0 = sc.next();
+        String nombre = nom0.toUpperCase().charAt(0) + nom0.substring(1, nom0.length()).toLowerCase();
         System.out.println("Ingrese los apellidos del Dueño de la/s mascota/s: ");
-        String apell = sc.next/*Line*/();
+        String apell = sc.next();
+        String apellido = apell.toUpperCase().charAt(0) + apell.substring(1, apell.length()).toLowerCase(); 
         System.out.println("Ingrese el numero de telefono del Dueño de la/s mascota/s: ");
-        String phoNum = sc.next/*Line*/();
+        String phoNum = sc.next();
         System.out.println("Ingrese el email del Dueño de la/s mascota/s: ");
-        String email = sc.next/*Line*/();
+        String email = sc.next().toLowerCase();
         System.out.println("Ingrese la direccion del Dueño de la/s mascota/s: ");
-        String direction = sc.next/*Line*/();
-        Dueño neoDu = new Dueño(idd, nom, apell, phoNum, email, direction);
+        String direction = sc.next().toLowerCase();
+        Dueño neoDu = new Dueño(idd, nombre, apellido, phoNum, email, direction);
         return neoDu;
     }
     //Obtener Dueño por email
