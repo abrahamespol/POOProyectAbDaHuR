@@ -18,7 +18,6 @@ import java.util.Scanner;
  * @author Abraham, Daniela, Victor
  */
 public class MiembroJurado extends Persona{
-    //Parte del distintivo personal podría ser el perfil profesional, o la lista de evaluaciones
     private String descripcionPerfilProfesional;
     private ArrayList<Evaluacion> evaluaciones;
     //
@@ -39,7 +38,14 @@ public class MiembroJurado extends Persona{
         return descripcionPerfilProfesional;
     }
 
-    //Setters no Heredados (la lista de evaluaciones puede ser editada por indice, en lugar de cambiada)
+    public ArrayList<Evaluacion> getEvaluaciones() {
+        return evaluaciones;
+    }
+
+    public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
+        this.evaluaciones = evaluaciones;
+    }
+
     
     public void setDescricpcionPerfilProfesional(String perfilProfesional){
         this.descripcionPerfilProfesional = perfilProfesional;
@@ -92,10 +98,6 @@ public class MiembroJurado extends Persona{
         return mjrs;
     }
     
-    //Pedir objeto por Scanner, AQUI NO SE PERMITE QUE EL USUARIO INGRESE EL ID DE MIEMBROJURADO, sino que se lo ingresa por medio de nextID    
-    //MUY IMPORTANTE: como cada objeto se guarda en un archivo, el ID depende de cuantos objetos esten guardados en este
-    //Por lo que al usar esta funcion, se meten un Scanner (para que el usuario llene los valores), y el nombre del archivo
-    //A pesar de que no se guarden objetos en ese lugar (Recuerda hacerle esas preguntas al profesor)
     public static MiembroJurado nextMiembroJurado(Scanner sc){
         sc.useDelimiter("\n");
         int idm = Util.nextID("miembroJurados.txt");
@@ -122,16 +124,4 @@ public class MiembroJurado extends Persona{
         }
         return null;
     }
-//        public static MiembroJurado obtenerMiembroJuradoXNombre(Scanner sc){
-//        ArrayList<MiembroJurado> jueces = MiembroJurado.readFromFile("miembroJurados.txt");
-//        sc.useDelimiter("\n");
-//        System.out.println("Ingrese el nombre del Miembro del Jurado que realiza la evaluacion: ");
-//        String nombre1= sc.next();
-//        for(MiembroJurado miembro: jueces){
-//            if(Objects.equals(miembro.nombre,nombre1))
-//                 return miembro;   
-//        }
-//        return null;
-//    }        
-        
 }

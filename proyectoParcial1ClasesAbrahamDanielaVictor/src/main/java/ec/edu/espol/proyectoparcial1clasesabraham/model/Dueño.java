@@ -35,8 +35,16 @@ public class Dueño extends Persona{
     public String getDireccion() {
         return direccion;
     }
+
+    public ArrayList<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public void setMascotas(ArrayList<Mascota> mascotas) {
+        this.mascotas = mascotas;
+    }
     
-    //Setters no Heredados (La lista de Mascotas puede ser editada, no tiene por que ser eliminada)
+    //Setters no Heredados 
     
     public void setDireccion(String direccion){
         this.direccion = direccion;
@@ -55,8 +63,6 @@ public class Dueño extends Persona{
         return sb.toString();
     }
     
-    // Un dueño puede ser comparado por su id, nombres y apellidos (Lista de mascotas y direccion
-    //puede ser algo a cambiar dependiendo de cuantos concursos se hagan y se registren
     
     //NO ES NECESARIO SOBREESCRIBIR EL EQUALS, SOLO SE HEREDA
     
@@ -91,10 +97,6 @@ public class Dueño extends Persona{
         return dos;
     }
     
-    //Pedir objeto por Scanner, AQUI NO SE PERMITE QUE EL USUARIO INGRESE EL ID DE DUEÑO, sino que se lo ingresa por medio de nextID    
-    //MUY IMPORTANTE: como cada objeto se guarda en un archivo, el ID depende de cuantos objetos esten guardados en este
-    //Por lo que al usar esta funcion, se meten un Scanner (para que el usuario llene los valores), y el nombre del archivo
-    //A pesar de que no se guarden objetos en ese lugar
     public static Dueño nextDueno(Scanner sc){
         sc.useDelimiter("\n");
         int idd = Util.nextID("dueños.txt");

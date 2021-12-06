@@ -121,7 +121,7 @@ public class Premio {
         int plP = sc.nextInt();
         System.out.println("Ingrese la descripcion de su Premio: ");
         String descrP = sc.nextLine();
-        Premio pr = new Premio(idp, idC, plP, descrP);/*, nullESTO ES HASTA NUEVO AVISO, OSEA HASTA CREAR EL METODO MENU DENTRO DE LA CLASE UTIL*/
+        Premio pr = new Premio(idp, idC, plP, descrP);
         return pr;
     }
 
